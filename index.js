@@ -4,6 +4,7 @@ const dotenv = require("dotenv").config();
 const PORT = process.env.PORT || 3000;
 const authRoute = require("./routes/authRoute");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 
 mongoose
   .connect(process.env.MONGO)
@@ -13,7 +14,7 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
-
+app.use(bodyParser.json());
 app.use("/api/user", authRoute);
 
 app.listen(PORT, () => {
