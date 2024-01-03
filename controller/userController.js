@@ -13,4 +13,15 @@ const createUser = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { createUser };
+const loginUser = asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
+  //check if user exists or not
+  const findUser = await User.findOne({ email: email });
+  if (findUser && (await findUser.matchPassword(password))) {
+    res.json(findUser);
+  } else {
+    throw new Error("Invalid email or password");
+  }
+});
+
+module.exports = { createUser, loginUser };
