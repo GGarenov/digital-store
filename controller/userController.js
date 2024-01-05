@@ -67,4 +67,26 @@ const deleteUser = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { createUser, loginUser, getAllUsers, getSingleUser, deleteUser };
+//Update a single user
+const updatedUser = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      id,
+      {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        mobile: req.body.mobile,
+      },
+      {
+        new: true,
+      }
+    );
+    res.json({ updatedUser });
+  } catch (error) {
+    throw new Error("User not found");
+  }
+});
+
+module.exports = { createUser, loginUser, getAllUsers, getSingleUser, deleteUser, updatedUser };
