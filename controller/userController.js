@@ -32,4 +32,15 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { createUser, loginUser };
+// Get all users
+
+const getAllUsers = asyncHandler(async (req, res) => {
+  try {
+    const getUsers = await User.find({});
+    res.json(getUsers);
+  } catch (error) {
+    throw new Error("Users not found");
+  }
+});
+
+module.exports = { createUser, loginUser, getAllUsers };
