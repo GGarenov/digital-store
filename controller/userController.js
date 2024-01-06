@@ -2,6 +2,7 @@ const User = require("../models/userModel");
 const asyncHandler = require("express-async-handler");
 const generateToken = require("../config/jwt");
 const validateMongodbId = require("../utils/validateMongodbId");
+const generateRefreshToken = require("../config/refreshtoken");
 
 const createUser = asyncHandler(async (req, res) => {
   const email = req.body.email;
@@ -20,6 +21,20 @@ const loginUser = asyncHandler(async (req, res) => {
   //check if user exists or not
   const findUser = await User.findOne({ email: email });
   if (findUser && (await findUser.matchPassword(password))) {
+    const refreshToken = await generateRefreshToken(findUser._id);
+    const updatedUser = await User.findByIdAndUpdate(
+      findUser.id,
+      {
+        refreshToken: refreshToken,
+      },
+      {
+        new: true,
+      }
+    );
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+    });
     res.json({
       _id: findUser._id,
       firstName: findUser.firstName,
@@ -51,7 +66,7 @@ const getSingleUser = asyncHandler(async (req, res) => {
   validateMongodbId(id);
   try {
     const getUser = await User.findById(id);
-    res.json({ getUser });
+    res.json(getUser);
   } catch (error) {
     throw new Error("User not found");
   }
@@ -63,7 +78,7 @@ const deleteUser = asyncHandler(async (req, res) => {
   const { id } = req.params;
   try {
     const deleteUser = await User.findByIdAndDelete(id);
-    res.json({ deleteUser });
+    res.json(deleteUser);
   } catch (error) {
     throw new Error("User not found");
   }
@@ -96,7 +111,7 @@ const blockUser = asyncHandler(async (req, res) => {
   const { id } = req.params;
   validateMongodbId(id);
   try {
-    const blockUser = await User.findByIdAndUpdate(
+    const blockedUser = await User.findByIdAndUpdate(
       id,
       {
         isBlocked: true,
@@ -117,7 +132,7 @@ const unblockUser = asyncHandler(async (req, res) => {
   const { id } = req.params;
   validateMongodbId(id);
   try {
-    const unblockUser = await User.findByIdAndUpdate(
+    const unblockedUser = await User.findByIdAndUpdate(
       id,
       {
         isBlocked: false,
