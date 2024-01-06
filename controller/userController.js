@@ -33,6 +33,7 @@ const loginUser = asyncHandler(async (req, res) => {
     );
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
+      path: "/api/user/refresh",
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
     res.json({
@@ -82,6 +83,16 @@ const deleteUser = asyncHandler(async (req, res) => {
   } catch (error) {
     throw new Error("User not found");
   }
+});
+
+//Handle refresh token
+
+const handleRefreshToken = asyncHandler(async (req, res) => {
+  const cookie = req.cookies;
+  console.log(cookie);
+  if (!cookie.refreshToken) throw new Error("No refresh token found");
+  const { refreshToken } = cookie.refreshToken;
+  console.log(refreshToken);
 });
 
 //Update a single user
@@ -149,4 +160,14 @@ const unblockUser = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { createUser, loginUser, getAllUsers, getSingleUser, deleteUser, updatedUser, blockUser, unblockUser };
+module.exports = {
+  createUser,
+  loginUser,
+  getAllUsers,
+  getSingleUser,
+  deleteUser,
+  updatedUser,
+  blockUser,
+  unblockUser,
+  handleRefreshToken,
+};
