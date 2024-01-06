@@ -69,10 +69,10 @@ const deleteUser = asyncHandler(async (req, res) => {
 
 //Update a single user
 const updatedUser = asyncHandler(async (req, res) => {
-  const { id } = req.params;
+  const { _id } = req.user;
   try {
     const updatedUser = await User.findByIdAndUpdate(
-      id,
+      _id,
       {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -83,7 +83,7 @@ const updatedUser = asyncHandler(async (req, res) => {
         new: true,
       }
     );
-    res.json({ updatedUser });
+    res.json(updatedUser);
   } catch (error) {
     throw new Error("User not found");
   }
