@@ -90,8 +90,11 @@ const updatedUser = asyncHandler(async (req, res) => {
 });
 
 const blockUser = asyncHandler(async (req, res) => {
+  console.log("Block user function called");
   const { id } = req.params;
   try {
+    console.log("Attempting to block user with id:", id);
+
     const blockUser = await User.findByIdAndUpdate(
       id,
       {
@@ -101,17 +104,19 @@ const blockUser = asyncHandler(async (req, res) => {
         new: true,
       }
     );
+    console.log("User blocked:", blockUser);
     res.json({
       message: "User blocked successfully",
     });
   } catch (error) {
+    console.error("Error blocking user:", error);
     throw new Error("User not found");
   }
 });
 const unblockUser = asyncHandler(async (req, res) => {
   const { id } = req.params;
   try {
-    const blockUser = await User.findByIdAndUpdate(
+    const unblockUser = await User.findByIdAndUpdate(
       id,
       {
         isBlocked: false,
