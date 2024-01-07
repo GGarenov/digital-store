@@ -91,7 +91,7 @@ const handleRefreshToken = asyncHandler(async (req, res) => {
   const cookie = req.cookies;
   console.log(cookie);
   if (!cookie.refreshToken) throw new Error("No refresh token found");
-  const { refreshToken } = cookie.refreshToken;
+  const { refreshToken } = cookie;
   console.log(refreshToken);
 });
 
