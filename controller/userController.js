@@ -34,7 +34,6 @@ const loginUser = asyncHandler(async (req, res) => {
     );
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      path: "/api/user/refresh",
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
     res.json({
@@ -101,6 +100,32 @@ const handleRefreshToken = asyncHandler(async (req, res) => {
     const accessToken = generateToken(user._id);
     res.json({ accessToken });
   });
+});
+
+//Logout User
+const logoutUser = asyncHandler(async (req, res) => {
+  const cookie = req.cookies;
+  if (!cookie?.refreshToken) throw new Error("No Refresh Token in Cookies");
+  const refreshToken = cookie.refreshToken;
+  const user = await User.findOne({ refreshToken });
+  if (!user) {
+    res.clearCookie("refreshToken", {
+      httpOnly: true,
+      secure: true,
+    });
+    return res.sendStatus(204); // forbidden
+  }
+  await User.findOneAndUpdate(
+    { refreshToken: refreshToken },
+    {
+      refreshToken: "",
+    }
+  );
+  res.clearCookie("refreshToken", {
+    httpOnly: true,
+    secure: true,
+  });
+  res.sendStatus(204); // forbidden
 });
 
 //Update a single user
@@ -178,4 +203,5 @@ module.exports = {
   blockUser,
   unblockUser,
   handleRefreshToken,
+  logoutUser,
 };
