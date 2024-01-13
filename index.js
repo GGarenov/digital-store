@@ -10,7 +10,7 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 const blogRoute = require("./routes/blogRoute");
-const categoryRoute = require("./routes/categoryRoute");
+const productCategoryRoute = require("./routes/productCategoryRoute");
 dbConnect();
 
 app.use(morgan("dev"));
@@ -21,7 +21,7 @@ app.use(cookieParser());
 app.use("/api/user", authRoute);
 app.use("/api/product", productRoute);
 app.use("/api/blog", blogRoute);
-app.use("/api/category", categoryRoute);
+app.use("/api/category", productCategoryRoute);
 
 app.use(notFound);
 app.use(errorHandler);
