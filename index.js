@@ -11,6 +11,7 @@ const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 const blogRoute = require("./routes/blogRoute");
 const productCategoryRoute = require("./routes/productCategoryRoute");
+const blogCategoryRoute = require("./routes/blogCategoryRoute");
 dbConnect();
 
 app.use(morgan("dev"));
@@ -22,6 +23,7 @@ app.use("/api/user", authRoute);
 app.use("/api/product", productRoute);
 app.use("/api/blog", blogRoute);
 app.use("/api/category", productCategoryRoute);
+app.use("/api/blogCategory", blogCategoryRoute);
 
 app.use(notFound);
 app.use(errorHandler);
