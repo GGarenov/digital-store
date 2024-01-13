@@ -22,4 +22,16 @@ const getAllCoupons = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { createCoupon, getAllCoupons };
+//Update a coupon
+const updateCoupon = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  validateMongodbId(id);
+  try {
+    const updateCoupon = await Coupon.findByIdAndUpdate(id, req.body, { new: true });
+    res.json(updateCoupon);
+  } catch (error) {
+    throw new Error(error);
+  }
+});
+
+module.exports = { createCoupon, getAllCoupons, updateCoupon };
