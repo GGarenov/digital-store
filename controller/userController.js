@@ -322,6 +322,11 @@ const getWishList = asyncHandler(async (req, res) => {
   }
 });
 
+//Cart functionality
+const userCart = asyncHandler(async (req, res) => {
+  res.send("Tuka e kolichkata bratle");
+});
+
 module.exports = {
   createUser,
   loginUser,
@@ -339,4 +344,5 @@ module.exports = {
   loginAdmin,
   getWishList,
   saveAddress,
+  userCart,
 };
