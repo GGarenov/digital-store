@@ -7,6 +7,7 @@ const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
 const sendEmail = require("../controller/emailController");
 
+//Create a new user
 const createUser = asyncHandler(async (req, res) => {
   const email = req.body.email;
   const findUser = await User.findOne({ email: email });
@@ -19,6 +20,7 @@ const createUser = asyncHandler(async (req, res) => {
   }
 });
 
+//Login a user
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   //check if user exists or not
@@ -45,6 +47,40 @@ const loginUser = asyncHandler(async (req, res) => {
       email: findUser.email,
       mobile: findUser.mobile,
       token: generateToken(findUser._id),
+    });
+  } else {
+    throw new Error("Invalid email or password");
+  }
+});
+
+//Admin Login
+const loginAdmin = asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
+  //check if user exists or not
+  const findAdmin = await User.findOne({ email: email });
+  if (findAdmin.role !== "admin") throw new Error("You are not an admin");
+  if (findAdmin && (await findAdmin.matchPassword(password))) {
+    const refreshToken = await generateRefreshToken(findAdmin._id);
+    const updatedUser = await User.findByIdAndUpdate(
+      findAdmin.id,
+      {
+        refreshToken: refreshToken,
+      },
+      {
+        new: true,
+      }
+    );
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+    });
+    res.json({
+      _id: findAdmin._id,
+      firstName: findAdmin.firstName,
+      lastName: findAdmin.lastName,
+      email: findAdmin.email,
+      mobile: findAdmin.mobile,
+      token: generateToken(findAdmin._id),
     });
   } else {
     throw new Error("Invalid email or password");
@@ -153,6 +189,7 @@ const updatedUser = asyncHandler(async (req, res) => {
   }
 });
 
+//Block a single user
 const blockUser = asyncHandler(async (req, res) => {
   const { id } = req.params;
   validateMongodbId(id);
@@ -174,6 +211,8 @@ const blockUser = asyncHandler(async (req, res) => {
     throw new Error("User not found");
   }
 });
+
+//Unblock a single user
 const unblockUser = asyncHandler(async (req, res) => {
   const { id } = req.params;
   validateMongodbId(id);
@@ -266,4 +305,5 @@ module.exports = {
   updatePassword,
   forgotPasswordToken,
   resetPassword,
+  loginAdmin,
 };
