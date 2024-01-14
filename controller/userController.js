@@ -87,6 +87,26 @@ const loginAdmin = asyncHandler(async (req, res) => {
   }
 });
 
+//save user Address
+const saveAddress = asyncHandler(async (req, res, next) => {
+  const { _id } = req.user;
+  validateMongodbId(_id);
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      _id,
+      {
+        address: req.body.address,
+      },
+      {
+        new: true,
+      }
+    );
+    res.json(updatedUser);
+  } catch (error) {
+    throw new Error("User not found");
+  }
+});
+
 // Get all users
 
 const getAllUsers = asyncHandler(async (req, res) => {
@@ -318,4 +338,5 @@ module.exports = {
   resetPassword,
   loginAdmin,
   getWishList,
+  saveAddress,
 };
