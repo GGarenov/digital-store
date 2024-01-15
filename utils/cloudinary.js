@@ -15,6 +15,8 @@ const claudinaryUploadImg = async (fileToUpload) => {
         resolve(
           {
             url: result.secure_url,
+            asset_id: result.asset_id,
+            public_id: result.public_id,
           },
           {
             resource_type: "auto",
@@ -25,4 +27,25 @@ const claudinaryUploadImg = async (fileToUpload) => {
   });
 };
 
-module.exports = claudinaryUploadImg;
+const claudinaryDeleteImg = async (fileToDelete) => {
+  return new Promise((resolve, reject) => {
+    cloudinary.uploader.destroy(fileToDelete, (error, result) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(
+          {
+            url: result.secure_url,
+            asset_id: result.asset_id,
+            public_id: result.public_id,
+          },
+          {
+            resource_type: "auto",
+          }
+        );
+      }
+    });
+  });
+};
+
+module.exports = { claudinaryUploadImg, claudinaryDeleteImg };
