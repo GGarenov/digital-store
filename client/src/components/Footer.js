@@ -47,12 +47,12 @@ function Footer() {
                   g_garenov@outlook.com
                 </a>
                 <div className="social-icons d-flex align-items-center gap-30">
-                  <a href="">
+                  <Link to="https://www.linkedin.com/in/ggarenov/">
                     <BsLinkedin className="text-white fs-5" />
-                  </a>
-                  <a href="">
+                  </Link>
+                  <Link to="https://github.com/GGarenov">
                     <BsGithub className="text-white fs-5" />
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

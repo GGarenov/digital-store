@@ -100,7 +100,7 @@ function Header() {
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                     >
-                      <img src="images/menu.svg" /> <span className="me-5 d-inline-block">Categories</span>
+                      <img src="images/menu.svg" alt="menu" /> <span className="me-5 d-inline-block">Categories</span>
                     </button>
                     <ul class="dropdown-menu">
                       <li>
