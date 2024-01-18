@@ -11,7 +11,7 @@ const validateMongodbId = require("../utils/validateMongodbId");
 const generateRefreshToken = require("../config/refreshtoken");
 const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
-const sendEmail = require("../controller/emailController");
+const sendEmail = require("./emailController");
 
 //Create a new user
 const createUser = asyncHandler(async (req, res) => {
