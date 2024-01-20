@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Marquee from "react-fast-marquee";
 import BlogCard from "../components/BlogCard";
 import ProductCard from "../components/ProductCard";
+import SpecialProduct from "../components/SpecialProduct";
 
 const Home = () => {
   return (
@@ -14,7 +15,7 @@ const Home = () => {
               <div className="main-banner position-relative p-3">
                 <img src="images/main-banner-1.jpg" className="img-fluid rounded-3" alt="main-banner" />
                 <div className="main-banner-content position-absolute">
-                  <h4>NQKAV TEXT</h4>
+                  <h4>Best Offer</h4>
                   <h5>iPhone 15 Pro</h5>
                   <p>From $2999 or $199.99/mo.</p>
                   <Link className="button">Buy Now</Link>
@@ -186,12 +187,27 @@ const Home = () => {
         <div className="container-xxl">
           <div className="row">
             <div className="col-12">
-              <h3 className="section-heading">Featured Products</h3>
+              <h3 className="section-heading">Featured Collections</h3>
             </div>
             <ProductCard />
             <ProductCard />
             <ProductCard />
             <ProductCard />
+          </div>
+        </div>
+      </section>
+
+      <section className="special-wrapper py-5 home-wrapper-2">
+        <div className="container-xxl">
+          <div className="row">
+            <div className="col-12">
+              <h3 className="section-heading">Special Products</h3>
+            </div>
+          </div>
+          <div className="row">
+            <SpecialProduct />
+            <SpecialProduct />
+            <SpecialProduct />
           </div>
         </div>
       </section>

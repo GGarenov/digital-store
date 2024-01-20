@@ -41,6 +41,7 @@ a {
   border-color: inherit;
 }
 
+
 .gap-10{
   gap: 10px;
 }
@@ -368,5 +369,16 @@ padding: 0;
 }
 
 /* Product Card End here */
+
+/*Special product card */
+.special-product-card{
+  padding:20px 10px;
+  border-radius: 10px;
+  background-color: white;
+}
+
+
+
+/*Special product card End here */
 
 /* Home page part End here */
