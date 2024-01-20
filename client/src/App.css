@@ -372,10 +372,18 @@ padding: 0;
 
 /*Special product card */
 .special-product-card{
+  display: flex;
   padding:20px 10px;
   border-radius: 10px;
   background-color: white;
 }
+
+.special-product-content{
+  width: 100%;
+}
+
+
+
 
 
 
