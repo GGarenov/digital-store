@@ -383,10 +383,41 @@ padding: 0;
 }
 
 
-
-
-
-
 /*Special product card End here */
+
+/*Famous product card */
+.famous-card .famous-content{
+  top: 10%;
+  left:5%;
+}
+
+.famous-card img{
+  border-radius: 10px;
+}
+
+.famous-content h5{
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 400px;
+  color: white;
+  margin-bottom: 7px;
+  text-transform: uppercase;
+}
+.famous-content h6{
+  font-size: 25px;
+  line-height: 38px;
+  font-weight: 500px;
+  color: white;
+  
+}
+.famous-content p{
+font-size: 16px;
+line-height: 24px;
+font-weight: 100;
+color: white;
+}
+
+
+/*Famous product card End here */
 
 /* Home page part End here */
