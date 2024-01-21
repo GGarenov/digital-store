@@ -491,4 +491,19 @@ border-color: var(--color-febd69);
   border-bottom: 2px solid var(--color-ededed);
 }
 
+.filter-sort-grid{
+  padding: 10px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.filter-sort-grid img {
+  width: 35px;
+  height: 35px;
+  background-color: #f2f2f2;
+  padding: 5px;
+  border-radius: 3px;
+}
+
+
 /* Store page part ends here */
