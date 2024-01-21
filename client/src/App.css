@@ -557,3 +557,18 @@ border-color: var(--color-febd69);
 
 
 /* Store page part ends here */
+
+
+/*Contact page part */
+.contact-inner-wrapper{
+  padding: 20px;
+  border-radius: 15px;
+  background-color: white;
+
+}
+
+.contact-inner-wrapper > div{
+  width: 48%;
+}
+
+/*Contact page part ends here */
