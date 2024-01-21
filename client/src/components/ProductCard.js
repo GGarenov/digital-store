@@ -8,7 +8,7 @@ const ProductCard = (props) => {
 
   return (
     <>
-      <div className={`${location.pathname === "/store" ? `col-${grid}` : "col-3"}`}>
+      <div className={`${location.pathname === "/store" ? `gr-${grid}` : "col-3"}`}>
         <Link className="product-card position-relative">
           <div className="wishlist-icon position-absolute">
             <Link>
@@ -23,6 +23,9 @@ const ProductCard = (props) => {
             <h6 className="brand">Havels</h6>
             <h5 className="product-title">Imeto na produkta</h5>
             <ReactStars count={5} size={24} value={3} edit={false} activeColor="#ffd700" />,
+            <p className={`description ${grid === 12 ? "d-block" : "d-none"}`}>
+              Opisanieto na produkta bratle gledai da e dulgo kakto trqbva s vsi4ki harakteristiki primerno ne znam.
+            </p>
             <p className="price">$200</p>
           </div>
           <div className="action-bar position-absolute">
@@ -40,7 +43,7 @@ const ProductCard = (props) => {
           </div>
         </Link>
       </div>
-      <div className={`${location.pathname === "/store" ? `col-${grid}` : "col-3"}`}>
+      <div className={`${location.pathname === "/store" ? `gr-${grid}` : "col-3"}`}>
         <Link className="product-card position-relative">
           <div className="wishlist-icon position-absolute">
             <Link>
@@ -55,6 +58,9 @@ const ProductCard = (props) => {
             <h6 className="brand">Havels</h6>
             <h5 className="product-title">Imeto na produkta</h5>
             <ReactStars count={5} size={24} value={3} edit={false} activeColor="#ffd700" />,
+            <p className={`description ${grid === 12 ? "d-block" : "d-none"}`}>
+              Opisanieto na produkta bratle gledai da e dulgo kakto trqbva s vsi4ki harakteristiki primerno ne znam.
+            </p>
             <p className="price">$200</p>
           </div>
           <div className="action-bar position-absolute">
