@@ -1,6 +1,7 @@
 import React from "react";
 import BreadCrumb from "../components/BreadCrumb";
 import Meta from "../components/Meta";
+import Color from "../components/Color";
 
 function CompareProduct() {
   return (
@@ -18,7 +19,7 @@ function CompareProduct() {
                 </div>
                 <div className="compare-product-details">
                   <h5 className="title">HonorT1 7.0 1GB RAM 8 GB ROM 7 Inch With Wi-Fi+5G Tablet</h5>
-                  <h6 className="price mb-3">$100</h6>
+                  <h6 className="price mb-3 mt-3">$100</h6>
                   <div>
                     <div className="product-details">
                       <h5>Brand:</h5>
@@ -26,15 +27,15 @@ function CompareProduct() {
                     </div>
                     <div className="product-details">
                       <h5>Type:</h5>
-                      <p>Havels</p>
+                      <p>Watch</p>
                     </div>
                     <div className="product-details">
                       <h5>Availability:</h5>
-                      <p>Havels</p>
+                      <p>In stock</p>
                     </div>
                     <div className="product-details">
                       <h5>Color:</h5>
-                      <p>Havels</p>
+                      <Color />
                     </div>
                     <div className="product-details">
                       <h5>Size:</h5>
@@ -42,7 +43,6 @@ function CompareProduct() {
                         <p>S</p>
                         <p>M</p>
                       </div>
-                      <p>Havels</p>
                     </div>
                   </div>
                 </div>
