@@ -597,7 +597,7 @@ list-style: none;
 /*Contact page part ends here */
 
 
-/*Compare product page part */
+/*Compare product and wishlist page part */
 .compare-product-card{
   padding: 20px 15px;
   background-color: white;
@@ -636,10 +636,50 @@ list-style: none;
 }
 
 
-/*Compare product page part ends here */
+/*Compare product and wishlist page part ends here */
 
-/*Wishlist page part */
+/*Login page part */
+.auth-card{
+  padding: 20px;
+  background-color: white;
+  width: 500px;
+  margin: 30px auto;
+  border-radius: 10px;
+}
+
+.auth-card h3{
+  font-size: 19px;
+  font-weight: 500;
+  color: var(--color-777777);
+}
+
+.auth-card .form-control {
+  height: 50px;
+  background-color: var(--color-f5f5f7);
+  color: var(--color-777777);
+  font-size: 14px;
+  border-radius: 10px;
+  border-color: transparent;
+}
+
+.auth-card a{
+font-size: 14px;
+font-weight: 400;
+color: var(--color-1c1c1b);
+}
+
+.auth-card .signup{
+  background-color: var(--color-febd69);
+  color: var(--color-131921);
+}
+.auth-card .signup:hover{
+  background-color: var(--color-131921);
+  color: white;
+}
+
+.auth-card .button {
+  margin-right: 20px; /* Adjust as needed */
+}
 
 
-
-/*Wishlist page part ends here */
+/*Login page part ends here */
