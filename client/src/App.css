@@ -605,7 +605,8 @@ list-style: none;
   
 }
 
-.compare-product-card .cross {
+.compare-product-card .cross,
+.wishlist-card .cross {
   top: 15px;
   right: 15px;
   width: 25px;
@@ -613,14 +614,14 @@ list-style: none;
   cursor: pointer;
 }
 
-.compare-product-detals h5.title{
+.compare-product-detals h5.title, .wishlist-card h5.title{
   font-size: 14px;
   line-height: 22px;
   font-weight: 500;
   color: var(--color-1c1c1b);
 }
 
-.compare-product-detals h6.price{
+.compare-product-detals h6.price, .wishlist-card h6.price{
   font-size: 15px;
   line-height: 20px;
   font-weight: 400;
@@ -636,3 +637,9 @@ list-style: none;
 
 
 /*Compare product page part ends here */
+
+/*Wishlist page part */
+
+
+
+/*Wishlist page part ends here */
