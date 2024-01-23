@@ -595,3 +595,44 @@ list-style: none;
 }
 
 /*Contact page part ends here */
+
+
+/*Compare product page part */
+.compare-product-card{
+  padding: 20px 15px;
+  background-color: white;
+  border-radius: 10px;
+  
+}
+
+.compare-product-card .cross {
+  top: 15px;
+  right: 15px;
+  width: 25px;
+  padding: 3px;
+  cursor: pointer;
+}
+
+.compare-product-detals h5.title{
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 500;
+  color: var(--color-1c1c1b);
+}
+
+.compare-product-detals h6.price{
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+.compare-product-card .product-details{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0px;
+  border-top: 1px solid var(--color-f5f5f7);
+}
+
+
+/*Compare product page part ends here */
