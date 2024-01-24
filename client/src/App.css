@@ -683,3 +683,8 @@ color: var(--color-1c1c1b);
 
 
 /*Login page part ends here */
+
+
+.center-text{
+  text-align: center;
+}

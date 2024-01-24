@@ -21,7 +21,9 @@ function Login() {
                   <input type="password" name="password" className="form-control" placeholder="password" />
                 </div>
                 <div>
-                  <Link to="/forgot-password">Forgot Password?</Link>
+                  <Link to="/forgot-password" className="mt-3 d-flex justify-content-center gap-20 align-items-center">
+                    Forgot Password?
+                  </Link>
                   <div className="mt-3 d-flex justify-content-center gap-20 align-items-center">
                     <button className="button border-0">Login</button>
                     <Link to="/signup" className="button signup">
