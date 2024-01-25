@@ -14,7 +14,7 @@ function BlogCard() {
           Lorem ipsum poneje ne mi rabotqt nqkoi snipeti shte si go pisha lorem ipsuma samichak bratle kvo da pravq v
           23:30 vecherta v chetvurtak bate...
         </p>
-        <Link to="/" className="button">
+        <Link to="/blog/:id" className="button">
           Read More
         </Link>
       </div>
