@@ -705,7 +705,13 @@ color: var(--color-1c1c1b);
 /*Login page part ends here */
 
 
+/*Privacy Policy Pages */
+.policy {
+  background-color: white;
+  padding: 30px;
+}
 
+/*Privacy Policy Pages ends here */
 
 
 
