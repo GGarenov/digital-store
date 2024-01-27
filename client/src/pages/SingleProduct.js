@@ -76,7 +76,7 @@ const SingleProduct = () => {
                     Write a review
                   </a>
                 </div>
-                <div className="border-bottom py-3">
+                <div className="py-3">
                   <div className="d-flex gap-10 align-items-center">
                     <h3 className="product-heading">Type :</h3> <p className="product-data">Watch</p>
                   </div>
@@ -136,7 +136,7 @@ const SingleProduct = () => {
                       </a>
                     </div>
                   </div>
-                  <div className="d-flex gap-10 align-items-center">
+                  <div className="d-flex gap-10 flex-column my-3">
                     <h3 className="product-heading">Shipping & Returns :</h3>{" "}
                     <p className="product-data">
                       Free shipping and returns available on all orders! <br /> We ship all over Bulgaria within
