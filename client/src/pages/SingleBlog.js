@@ -3,6 +3,7 @@ import Meta from "../components/Meta";
 import BreadCrumb from "../components/BreadCrumb";
 import { Link } from "react-router-dom";
 import { HiOutlineArrowLeft } from "react-icons/hi";
+import blog from "../images/blog-1.jpg";
 
 const SingleBlog = () => {
   return (
@@ -18,7 +19,7 @@ const SingleBlog = () => {
                   <HiOutlineArrowLeft className="fs-4" /> Back
                 </Link>
                 <h3 className="title">The best headphones jogging in the park</h3>
-                <img src="/images/blog-1.jpg" alt="blog" className="img-fluid w-100 my-4" />
+                <img src={blog} alt="blog" className="img-fluid w-100 my-4" />
                 <p>
                   Tuka sledva dulgo opisanie na produkta, kolko e gotin. Kakvi sa preimushtestvata da go imash ot kude
                   mojesh da si go zakupish. Abe kato cqlo dulag text da ima za zapulvane na mqsto da vidim kak shte
