@@ -38,8 +38,9 @@ const Checkout = () => {
                     </li>
                   </ol>
                 </nav>
-                <h4 className="title">Contact Informaction</h4>
-                <p className="user-details">G.Garenov g_garenov@outlook.com</p>
+                <h4 className="title total">Contact Informaction</h4>
+                <p className="user-details total">G.Garenov g_garenov@outlook.com</p>
+                <h4 className="mb-3">Shipping Address</h4>
                 <form action="" className="d-flex gap-15 flex-wrap justify-content-between">
                   <div className="w-100">
                     <select name="" className="form-control" id="">
@@ -101,23 +102,23 @@ const Checkout = () => {
                       <img className="img-fluid" src={watch} alt="product" />
                     </div>
                     <div>
-                      <h5 className="title">Chasovnik</h5>
-                      <p>Paragrafchi za chasovnika</p>
+                      <h5 className="total-price">Chasovnik</h5>
+                      <p className="total-price">Paragrafchi za chasovnika</p>
                     </div>
                   </div>
                   <div className="flex-grow-1">
-                    <h5>$100</h5>
+                    <h5 className="total-price">$100</h5>
                   </div>
                 </div>
               </div>
               <div className="border-bottom py-4">
                 <div className="d-flex justify-content-between align-items-center">
-                  <p>Subtotal</p>
-                  <p>$1000</p>
+                  <p className="total">Subtotal</p>
+                  <p className="total-price">$1000</p>
                 </div>
                 <div className="d-flex justify-content-between align-items-center">
-                  <p className="mb-0">Shipping</p>
-                  <p className="mb-0">$1000</p>
+                  <p className="mb-0 total">Shipping</p>
+                  <p className="mb-0 total-price">$1000</p>
                 </div>
                 <div className="d-flex justify-content-between align-items-center border-bottom py-4">
                   <h4 className="total">Total</h4>
