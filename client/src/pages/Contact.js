@@ -15,6 +15,7 @@ const Contact = () => {
         <div className="row">
           <div className="col-12">
             <iframe
+              title="google maps"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2934.7056380691297!2d23.393225074156792!3d42.64639997116771!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40aa86efecd65cf9%3A0x228909e10a694483!2sCapital%20Fort%2C%20Boulevard%20%22Tsarigradsko%20shose%22%2C%201784%207-Mi%20Kilometar%2C%20Sofia!5e0!3m2!1sen!2sbg!4v1705834448077!5m2!1sen!2sbg"
               width="600"
               height="450"

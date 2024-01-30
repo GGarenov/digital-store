@@ -3,7 +3,6 @@ import BreadCrumb from "../components/BreadCrumb";
 import Meta from "../components/Meta";
 import ProductCard from "../components/ProductCard";
 import ReactStars from "react-rating-stars-component";
-import { useState } from "react";
 import ReactImageZoom from "react-image-zoom";
 import Color from "../components/Color";
 import { TbGitCompare } from "react-icons/tb";
@@ -21,7 +20,7 @@ const SingleProduct = () => {
     offset: { vertical: 0, horizontal: 50 },
   };
 
-  const [orderedProduct, setorderedProduct] = useState(true);
+  const orderedProduct = true;
   return (
     <>
       <Meta title="Single Product" />
@@ -39,24 +38,28 @@ const SingleProduct = () => {
                 <img
                   src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
                   className="img-fluid"
+                  alt="product"
                 />
               </div>
               <div>
                 <img
                   src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
                   className="img-fluid"
+                  alt="product"
                 />
               </div>
               <div>
                 <img
                   src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
                   className="img-fluid"
+                  alt="product"
                 />
               </div>
               <div>
                 <img
                   src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
                   className="img-fluid"
+                  alt="product"
                 />
               </div>
             </div>
@@ -124,13 +127,13 @@ const SingleProduct = () => {
                 </div>
                 <div className="d-flex align-items-center gap-15">
                   <div>
-                    <a href="">
+                    <a href="/">
                       <TbGitCompare className="fs-5 mb-2" />
                       Add to Compare
                     </a>
                   </div>
                   <div>
-                    <a href="">
+                    <a href="/">
                       <AiOutlineHeart className="fs-5 mb-2" />
                       Add to Wishlist
                     </a>
@@ -177,7 +180,7 @@ const SingleProduct = () => {
                 <div>
                   {orderedProduct && (
                     <div>
-                      <a className="text-dark text-decoration-underline" href="">
+                      <a className="text-dark text-decoration-underline" href="/">
                         Write a review
                       </a>
                     </div>
