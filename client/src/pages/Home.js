@@ -90,226 +90,206 @@ const Home = () => {
         </div>
       </Container>
 
-      <section className="home-wrapper-3 py-5">
-        <div className="container-xxl">
-          <div className="row">
-            <div className="col-12">
-              <div className="categories d-flex justify-content-between flex-wrap align-items-center">
-                <div className="d-flex gap align-items-center">
-                  <div>
-                    <h6>Cameras</h6>
-                    <p>10 items</p>
-                  </div>
-                  <img src="images/camera.jpg" alt="camera" />
+      <Container class1="home-wrapper-2 py-5">
+        <div className="row">
+          <div className="col-12">
+            <div className="categories d-flex justify-content-between flex-wrap align-items-center">
+              <div className="d-flex gap align-items-center">
+                <div>
+                  <h6>Cameras</h6>
+                  <p>10 items</p>
                 </div>
-                <div className="d-flex gap align-items-center">
-                  <div>
-                    <h6>Smart Tv</h6>
-                    <p>10 items</p>
-                  </div>
-                  <img src="images/tv.jpg" alt="camera" />
+                <img src="images/camera.jpg" alt="camera" />
+              </div>
+              <div className="d-flex gap align-items-center">
+                <div>
+                  <h6>Smart Tv</h6>
+                  <p>10 items</p>
                 </div>
-                <div className="d-flex gap align-items-center">
-                  <div>
-                    <h6>Smart Watches</h6>
-                    <p>10 items</p>
-                  </div>
-                  <img src="images/headphone.jpg" alt="camera" />
+                <img src="images/tv.jpg" alt="camera" />
+              </div>
+              <div className="d-flex gap align-items-center">
+                <div>
+                  <h6>Smart Watches</h6>
+                  <p>10 items</p>
                 </div>
-                <div className="d-flex gap align-items-center">
-                  <div>
-                    <h6>Music & Gaming</h6>
-                    <p>10 items</p>
-                  </div>
-                  <img src="images/camera.jpg" alt="camera" />
+                <img src="images/headphone.jpg" alt="camera" />
+              </div>
+              <div className="d-flex gap align-items-center">
+                <div>
+                  <h6>Music & Gaming</h6>
+                  <p>10 items</p>
                 </div>
-                <div className="d-flex gap align-items-center">
-                  <div>
-                    <h6>Cameras</h6>
-                    <p>10 items</p>
-                  </div>
-                  <img src="images/camera.jpg" alt="camera" />
+                <img src="images/camera.jpg" alt="camera" />
+              </div>
+              <div className="d-flex gap align-items-center">
+                <div>
+                  <h6>Cameras</h6>
+                  <p>10 items</p>
                 </div>
-                <div className="d-flex gap align-items-center">
-                  <div>
-                    <h6>Smart Tv</h6>
-                    <p>10 items</p>
-                  </div>
-                  <img src="images/tv.jpg" alt="camera" />
+                <img src="images/camera.jpg" alt="camera" />
+              </div>
+              <div className="d-flex gap align-items-center">
+                <div>
+                  <h6>Smart Tv</h6>
+                  <p>10 items</p>
                 </div>
-                <div className="d-flex gap align-items-center">
-                  <div>
-                    <h6>Smart Watches</h6>
-                    <p>10 items</p>
-                  </div>
-                  <img src="images/headphone.jpg" alt="camera" />
+                <img src="images/tv.jpg" alt="camera" />
+              </div>
+              <div className="d-flex gap align-items-center">
+                <div>
+                  <h6>Smart Watches</h6>
+                  <p>10 items</p>
                 </div>
-                <div className="d-flex gap align-items-center">
-                  <div>
-                    <h6>Music & Gaming</h6>
-                    <p>10 items</p>
-                  </div>
-                  <img src="images/camera.jpg" alt="camera" />
+                <img src="images/headphone.jpg" alt="camera" />
+              </div>
+              <div className="d-flex gap align-items-center">
+                <div>
+                  <h6>Music & Gaming</h6>
+                  <p>10 items</p>
                 </div>
+                <img src="images/camera.jpg" alt="camera" />
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </Container>
 
-      <section className="featured-wrapper py-5 home-wrapper-2">
-        <div className="container-xxl">
-          <div className="row">
-            <div className="col-12">
-              <h3 className="section-heading">Featured Collections</h3>
+      <Container class1="featured-wrapper py-5 home-wrapper-2">
+        <div className="row">
+          <div className="col-12">
+            <h3 className="section-heading">Featured Collections</h3>
+          </div>
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+        </div>
+      </Container>
+
+      <Container class1="famous-wrapper py-5 home-wrapper-2">
+        <div className="row">
+          <div className="col-3">
+            <div className="famous-card position-relative">
+              <img src="images/famous-01.webp" className="img-fluid" alt="famous" />
+              <div className="famous-content position-absolute">
+                <h5>Big Screen</h5>
+                <h6>Smart Watch Series 7</h6>
+                <p>From $399 or $13/mo for 24 mo.* </p>
+              </div>
             </div>
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
+          </div>
+          <div className="col-3">
+            <div className="famous-card position-relative">
+              <img src="images/famous-02.webp" className="img-fluid" alt="famous" />
+              <div className="famous-content position-absolute">
+                <h5 className="text-dark">Studio Display</h5>
+                <h6 className="text-dark">600 nits of brightness</h6>
+                <p className="text-dark">27 incha tupalka televizor </p>
+              </div>
+            </div>
+          </div>
+          <div className="col-3">
+            <div className="famous-card position-relative">
+              <img src="images/famous-03.webp" className="img-fluid" alt="famous" />
+              <div className="famous-content position-absolute">
+                <h5 className="text-dark">Studio Display</h5>
+                <h6 className="text-dark">600 nits of brightness</h6>
+                <p className="text-dark">27 incha tupalka televizor </p>
+              </div>
+            </div>
+          </div>
+          <div className="col-3">
+            <div className="famous-card position-relative">
+              <img src="images/famous-04.webp" className="img-fluid" alt="famous" />
+              <div className="famous-content position-absolute">
+                <h5 className="text-dark">Studio Display</h5>
+                <h6 className="text-dark">600 nits of brightness</h6>
+                <p className="text-dark">27 incha tupalka televizor </p>
+              </div>
+            </div>
           </div>
         </div>
-      </section>
+      </Container>
 
-      <section className="famous-wrapper py-5 home-wrapper-2">
-        <div className="container-xxl">
-          <div className="row">
-            <div className="col-3">
-              <div className="famous-card position-relative">
-                <img src="images/famous-01.webp" className="img-fluid" alt="famous" />
-                <div className="famous-content position-absolute">
-                  <h5>Big Screen</h5>
-                  <h6>Smart Watch Series 7</h6>
-                  <p>From $399 or $13/mo for 24 mo.* </p>
+      <Container class1="special-wrapper py-5 home-wrapper-2">
+        <div className="row">
+          <div className="col-12">
+            <h3 className="section-heading">Special Products</h3>
+          </div>
+        </div>
+      </Container>
+
+      <Container class1="popular-wrapper py-5 home-wrapper-2">
+        <div className="row">
+          <div className="col-12">
+            <h3 className="section-heading">Popular products</h3>
+          </div>
+        </div>
+        <div className="row">
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+        </div>
+      </Container>
+
+      <Container class1="marque-wrapper py-5">
+        <div className="row">
+          <div className="col-12">
+            <div className="marque-inner-wrapper card-wrapper">
+              <Marquee className="d-flex">
+                <div className="mx-4 w-25">
+                  <img src="images/brand-01.png" alt="brand" />
                 </div>
-              </div>
-            </div>
-            <div className="col-3">
-              <div className="famous-card position-relative">
-                <img src="images/famous-02.webp" className="img-fluid" alt="famous" />
-                <div className="famous-content position-absolute">
-                  <h5 className="text-dark">Studio Display</h5>
-                  <h6 className="text-dark">600 nits of brightness</h6>
-                  <p className="text-dark">27 incha tupalka televizor </p>
+                <div className="mx-4 w-25">
+                  <img src="images/brand-02.png" alt="brand" />
                 </div>
-              </div>
-            </div>
-            <div className="col-3">
-              <div className="famous-card position-relative">
-                <img src="images/famous-03.webp" className="img-fluid" alt="famous" />
-                <div className="famous-content position-absolute">
-                  <h5 className="text-dark">Studio Display</h5>
-                  <h6 className="text-dark">600 nits of brightness</h6>
-                  <p className="text-dark">27 incha tupalka televizor </p>
+                <div className="mx-4 w-25">
+                  <img src="images/brand-03.png" alt="brand" />
                 </div>
-              </div>
-            </div>
-            <div className="col-3">
-              <div className="famous-card position-relative">
-                <img src="images/famous-04.webp" className="img-fluid" alt="famous" />
-                <div className="famous-content position-absolute">
-                  <h5 className="text-dark">Studio Display</h5>
-                  <h6 className="text-dark">600 nits of brightness</h6>
-                  <p className="text-dark">27 incha tupalka televizor </p>
+                <div className="mx-4 w-25">
+                  <img src="images/brand-04.png" alt="brand" />
                 </div>
-              </div>
+                <div className="mx-4 w-25">
+                  <img src="images/brand-05.png" alt="brand" />
+                </div>
+                <div className="mx-4 w-25">
+                  <img src="images/brand-06.png" alt="brand" />
+                </div>
+                <div className="mx-4 w-25">
+                  <img src="images/brand-07.png" alt="brand" />
+                </div>
+                <div className="mx-4 w-25">
+                  <img src="images/brand-08.png" alt="brand" />
+                </div>
+              </Marquee>
             </div>
           </div>
         </div>
-      </section>
+      </Container>
 
-      <section className="special-wrapper py-5 home-wrapper-2">
-        <div className="container-xxl">
-          <div className="row">
-            <div className="col-12">
-              <h3 className="section-heading">Special Products</h3>
-            </div>
-          </div>
-          <div className="row">
-            <SpecialProduct />
-            <SpecialProduct />
-            <SpecialProduct />
-            <SpecialProduct />
+      <Container class1="blog-wrapper py-5 home-wrapper-2">
+        <div className="row">
+          <div className="col-12">
+            <h3 className="section-heading">Our Latest Blogs</h3>
           </div>
         </div>
-      </section>
-
-      <section className="popular-wrapper py-5 home-wrapper-2">
-        <div className="container-xxl">
-          <div className="row">
-            <div className="col-12">
-              <h3 className="section-heading">Popular products</h3>
-            </div>
+        <div className="row">
+          <div className="col-3">
+            <BlogCard />
           </div>
-          <div className="row">
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
+          <div className="col-3">
+            <BlogCard />
+          </div>
+          <div className="col-3">
+            <BlogCard />
+          </div>
+          <div className="col-3">
+            <BlogCard />
           </div>
         </div>
-      </section>
-
-      <section className="marque-wrapper py-5">
-        <div className="container-xxl">
-          <div className="row">
-            <div className="col-12">
-              <div className="marque-inner-wrapper card-wrapper">
-                <Marquee className="d-flex">
-                  <div className="mx-4 w-25">
-                    <img src="images/brand-01.png" alt="brand" />
-                  </div>
-                  <div className="mx-4 w-25">
-                    <img src="images/brand-02.png" alt="brand" />
-                  </div>
-                  <div className="mx-4 w-25">
-                    <img src="images/brand-03.png" alt="brand" />
-                  </div>
-                  <div className="mx-4 w-25">
-                    <img src="images/brand-04.png" alt="brand" />
-                  </div>
-                  <div className="mx-4 w-25">
-                    <img src="images/brand-05.png" alt="brand" />
-                  </div>
-                  <div className="mx-4 w-25">
-                    <img src="images/brand-06.png" alt="brand" />
-                  </div>
-                  <div className="mx-4 w-25">
-                    <img src="images/brand-07.png" alt="brand" />
-                  </div>
-                  <div className="mx-4 w-25">
-                    <img src="images/brand-08.png" alt="brand" />
-                  </div>
-                </Marquee>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="blog-wrapper py-5 home-wrapper-2">
-        <div className="container-xxl">
-          <div className="row">
-            <div className="col-12">
-              <h3 className="section-heading">Our Latest Blogs</h3>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-3">
-              <BlogCard />
-            </div>
-            <div className="col-3">
-              <BlogCard />
-            </div>
-            <div className="col-3">
-              <BlogCard />
-            </div>
-            <div className="col-3">
-              <BlogCard />
-            </div>
-          </div>
-        </div>
-      </section>
+      </Container>
     </>
   );
 };
