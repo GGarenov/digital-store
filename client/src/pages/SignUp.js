@@ -3,6 +3,7 @@ import BreadCrumb from "../components/BreadCrumb";
 import Meta from "../components/Meta";
 import { Link } from "react-router-dom";
 import Container from "../components/Container";
+import CustomInput from "../components/CustomInput";
 
 const SignUp = () => {
   return (
@@ -15,19 +16,11 @@ const SignUp = () => {
             <div className="auth-card">
               <h3 className="text-center mb-3">Create Account</h3>
               <form className="d-flex flex-column gap-15" action="">
-                <div className="mt-3">
-                  <input type="name" name="firstName" className="form-control" placeholder="Name" />
-                </div>
+                <CustomInput type="text" name="name" placeholder="Name" />
+                <CustomInput type="email" name="email" className="form-control" placeholder="email" />
+                <CustomInput type="tel" name="mobile" className="form-control" placeholder="Mobile number" />
+                <CustomInput type="password" name="password" className="form-control" placeholder="password" />
 
-                <div className="mt-3">
-                  <input type="email" name="email" className="form-control" placeholder="email" />
-                </div>
-                <div className="mt-3">
-                  <input type="tel" name="mobile" className="form-control" placeholder="Mobile number" />
-                </div>
-                <div>
-                  <input type="password" name="password" className="form-control" placeholder="password" />
-                </div>
                 <div>
                   <div className="mt-3 d-flex justify-content-center gap-20 align-items-center">
                     <button className="button border-0">Create</button>

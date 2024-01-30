@@ -3,6 +3,7 @@ import BreadCrumb from "../components/BreadCrumb";
 import Meta from "../components/Meta";
 import { Link } from "react-router-dom";
 import Container from "../components/Container";
+import CustomInput from "../components/CustomInput";
 
 const ForgotPassword = () => {
   return (
@@ -19,9 +20,8 @@ const ForgotPassword = () => {
                 Enter your email address and we will send you a link to reset your password.
               </p>
               <form className="d-flex flex-column gap-15" action="">
-                <div className="mt-3">
-                  <input type="email" name="email" className="form-control" placeholder="email" />
-                </div>
+                <CustomInput type="email" name="email" placeholder="email" />
+
                 <div>
                   <div className="mt-3 d-flex justify-content-center flex-column gap-15 align-items-center">
                     <button className="button border-0">Submit</button>

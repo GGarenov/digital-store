@@ -3,6 +3,7 @@ import BreadCrumb from "../components/BreadCrumb";
 import Meta from "../components/Meta";
 import { Link } from "react-router-dom";
 import Container from "../components/Container";
+import CustomInput from "../components/CustomInput";
 
 function Login() {
   return (
@@ -15,12 +16,9 @@ function Login() {
             <div className="auth-card">
               <h3 className="text-center mb-3">Login</h3>
               <form className="d-flex flex-column gap-15" action="">
-                <div className="mt-3">
-                  <input type="email" name="email" className="form-control" placeholder="email" />
-                </div>
-                <div>
-                  <input type="password" name="password" className="form-control" placeholder="password" />
-                </div>
+                <CustomInput type="email" name="email" placeholder="email" />
+                <CustomInput type="password" name="password" placeholder="password" />
+
                 <div>
                   <Link to="/forgot-password" className="mt-3 d-flex justify-content-center gap-20 align-items-center">
                     Forgot Password?
