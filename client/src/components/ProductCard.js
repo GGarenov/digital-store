@@ -16,7 +16,12 @@ const ProductCard = (props) => {
   return (
     <>
       <div className={`${location.pathname === "/store" ? `gr-${grid}` : "col-3"}`}>
-        <Link to=":id" className="product-card position-relative">
+        <Link
+          to={`${
+            location.pathname === "/" ? "product/:id" : location.pathname === "/product/:id" ? "/product/:id" : ":id"
+          }`}
+          className="product-card position-relative"
+        >
           <div className="wishlist-icon position-absolute">
             <button className="border-0 bg-transperant">
               <img src={wish} alt="wishlist" />
@@ -51,15 +56,15 @@ const ProductCard = (props) => {
         </Link>
       </div>
       <div className={`${location.pathname === "/store" ? `gr-${grid}` : "col-3"}`}>
-        <Link className="product-card position-relative">
+        <Link to={`${location.pathname === "/" ? "product/:id" : ":id"}`} className="product-card position-relative">
           <div className="wishlist-icon position-absolute">
             <Link>
               <img src={wishlist} alt="wishlist" />
             </Link>
           </div>
           <div className="product-image">
-            <img src="images/watch.jpg" className="img-fluid" alt="product" />
-            <img src="images/watch-2.avif" className="img-fluid" alt="product" />
+            <img src={watch} className="img-fluid" alt="product" />
+            <img src={watch2} className="img-fluid" alt="product" />
           </div>
           <div className="product-details">
             <h6 className="brand">Havels</h6>
@@ -73,13 +78,13 @@ const ProductCard = (props) => {
           <div className="action-bar position-absolute">
             <div className="d-flex flex-column gap-15">
               <Link>
-                <img src="images/add-cart.svg" alt="cart" />
+                <img src={addcart} alt="cart" />
               </Link>
               <Link>
-                <img src="images/prodcompare.svg" alt="compare" />
+                <img src={productcompare} alt="compare" />
               </Link>
               <Link>
-                <img src="images/view.svg" alt="view" />
+                <img src={view} alt="view" />
               </Link>
             </div>
           </div>

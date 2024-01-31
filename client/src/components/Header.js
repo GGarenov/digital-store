@@ -27,7 +27,9 @@ function Header() {
           <div className="row align-items-center">
             <div className="col-2">
               <h2>
-                <Link className="text-white">Electronic Shop</Link>
+                <Link to="/" className="text-white">
+                  Electronic Shop
+                </Link>
               </h2>
             </div>
             <div className="col-5">
@@ -93,7 +95,7 @@ function Header() {
             <div className="col-12">
               <div className="menu-bottom d-flex align-items-center gap-30">
                 <div>
-                  <div class="dropdown">
+                  <div className="dropdown">
                     <button
                       className="btn btn-secondary dropdown-toggle bg-transparent border-0 gap-15 d-flex align-items-center"
                       type="button"
@@ -102,7 +104,7 @@ function Header() {
                     >
                       <img src="images/menu.svg" alt="menu" /> <span className="me-5 d-inline-block">Categories</span>
                     </button>
-                    <ul class="dropdown-menu">
+                    <ul className="dropdown-menu">
                       <li>
                         <Link className="dropdown-item text-white" to="#">
                           Action
