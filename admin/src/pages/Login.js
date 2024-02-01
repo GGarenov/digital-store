@@ -1,5 +1,6 @@
 import React from "react";
 import CustomInput from "../components/CustomInput";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
@@ -12,15 +13,19 @@ const Login = () => {
         <h3 className="text-center">Login</h3>
         <p className="text-center">Login to your account to continue.</p>
         <form>
-          <CustomInput type="text" placeholder="email" id="email" />
-          <CustomInput type="password" placeholder="password" id="password" />
-          <button
-            className="border-0 px-3 py-2 text-white fw-bold w-100"
+          <CustomInput type="text" label="email" id="email" />
+          <CustomInput type="password" label="password" id="password" />
+          <div className="mb-3 text-end">
+            <Link to="forgot-password">Forgot Password</Link>
+          </div>
+          <Link
+            to="/admin"
+            className="border-0 px-3 py-2 text-white fw-bold w-100 text-center text-decoration-none fs-5"
             style={{ background: "#ffd333" }}
             type="submit"
           >
             Login
-          </button>
+          </Link>
         </form>
       </div>
     </div>
