@@ -1,10 +1,10 @@
 import React from "react";
+import { useState } from "react";
 import CustomInput from "../components/CustomInput";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { InboxOutlined } from "@ant-design/icons";
 import { message, Upload } from "antd";
-import { useState } from "react";
 const { Dragger } = Upload;
 
 const props = {
@@ -34,7 +34,7 @@ const AddBlog = () => {
   };
   return (
     <div>
-      <h3 className="mb-4">Add Blog</h3>
+      <h3 className="mb-4 title">Add Blog</h3>
 
       <div className="">
         <Dragger {...props}>

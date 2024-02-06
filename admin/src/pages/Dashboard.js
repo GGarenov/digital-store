@@ -111,11 +111,11 @@ const Dashboard = () => {
   };
   return (
     <div>
-      <h3 className="mb-4">Dashboard</h3>
+      <h3 className="mb-4 title">Dashboard</h3>
       <div className="d-flex justify-content-between align-items-center gap-3">
         <div className="d-flex justify-content-between align-items-end flex-grow-1 bg-white p-3 rounded-3">
           <div>
-            <p className="">Total</p> <h4 className="mb-0">$1100</h4>
+            <p className="mb-0 desc">Total</p> <h4 classname="mb-0 sub-title">$1100</h4>
           </div>
           <div className="d-flex flex-column align-items-end">
             <h6 className="green">
@@ -126,7 +126,7 @@ const Dashboard = () => {
         </div>
         <div className="d-flex justify-content-between align-items-end flex-grow-1 bg-white p-3 rounded-3">
           <div>
-            <p className="">Total</p> <h4 className="mb-0">$1100</h4>
+            <p className="mb-0 desc">Total</p> <h4 classname="mb-0 sub-title">$1100</h4>
           </div>
           <div className="d-flex flex-column align-items-end">
             <h6 className="red">
@@ -137,7 +137,7 @@ const Dashboard = () => {
         </div>
         <div className="d-flex justify-content-between align-items-end flex-grow-1 bg-white p-3 rounded-3">
           <div>
-            <p className="">Total</p> <h4 className="mb-0">$1100</h4>
+            <p className="mb-0 desc">Total</p> <h4 classname="mb-0 sub-title">$1100</h4>
           </div>
           <div className="d-flex flex-column align-items-end">
             <h6 className="green">
@@ -147,16 +147,18 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <div className="mt-4">
-        <h3 className="mb-4">Income Statistics</h3>
-        <div>
-          <Column {...config} />
+      <div className="d-flex gap-3 justify-content-between">
+        <div className="mt-4 flex-grow-1">
+          <h3 className="mb-4 title">Income Statistics</h3>
+          <div>
+            <Column {...config} />
+          </div>
         </div>
-      </div>
-      <div className="mt-4">
-        <h3 className="mb-4">Recent Orders</h3>
-        <div>
-          <Table columns={columns} dataSource={data1} />
+        <div className="mt-4 flex-grow-1">
+          <h3 className="mb-4 title">Recent Orders</h3>
+          <div>
+            <Table columns={columns} dataSource={data1} />
+          </div>
         </div>
       </div>
     </div>
