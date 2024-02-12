@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import {
   AiOutlineDashboard,
@@ -11,14 +11,12 @@ import { SiBrandfolder } from "react-icons/si";
 import { BiCategoryAlt } from "react-icons/bi";
 import { IoIosNotifications } from "react-icons/io";
 import { FaClipboardList, FaBloggerB } from "react-icons/fa";
-import { Layout, Menu, Button, theme } from "antd";
+import { Layout, Menu, Button, ConfigProvider } from "antd";
 
 const { Header, Sider, Content } = Layout;
 const MainLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const {
-    token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
+  const { colorBgContainer } = useContext(ConfigProvider.ConfigContext);
   const navigate = useNavigate();
   return (
     <Layout>
@@ -182,7 +180,6 @@ const MainLayout = () => {
             padding: 24,
             minHeight: 280,
             background: colorBgContainer,
-            borderRadius: borderRadiusLG,
           }}
         >
           <Outlet />
