@@ -1,10 +1,15 @@
 import React from "react";
 import CustomInput from "../components/CustomInput";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../features/auth/authSlice";
+import { useEffect } from "react";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   let schema = Yup.object().shape({
     email: Yup.string()
       .email("Email should be valid bratle")
@@ -18,9 +23,20 @@ const Login = () => {
     },
     validationSchema: schema,
     onSubmit: (values) => {
+      dispatch(login(values));
       alert(JSON.stringify(values, null, 2));
     },
   });
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+  useEffect(() => {
+    if (!user || isSuccess) {
+      navigate("admin");
+    } else {
+      alert("greshka priqtel");
+    }
+  }, [user, isLoading, isError, isSuccess, message, navigate]);
   return (
     <div className="py-5" style={{ background: "#ffd333", minHeight: "100vh" }}>
       <br />
