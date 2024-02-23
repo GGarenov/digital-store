@@ -9,6 +9,7 @@ const productRoute = require("./routes/productRoute");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
+const cors = require("cors");
 const blogRoute = require("./routes/blogRoute");
 const productCategoryRoute = require("./routes/productCategoryRoute");
 const blogCategoryRoute = require("./routes/blogCategoryRoute");
@@ -19,6 +20,7 @@ const couponRoute = require("./routes/couponRoute");
 dbConnect();
 
 app.use(morgan("dev"));
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
