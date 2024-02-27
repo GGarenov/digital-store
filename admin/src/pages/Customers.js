@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Table } from "antd";
+import { getUsers } from "./path-to-your-action"; // replace 'path-to-your-action' with the actual path
 const columns = [
   {
     title: "No",
@@ -29,6 +31,11 @@ for (let i = 0; i < 46; i++) {
 }
 
 const Customers = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getUsers());
+  }, []);
+  const state = useSelector((state) => state.customer.Customers);
   return (
     <div>
       <h3 className="mb-4 title">Customers</h3>
