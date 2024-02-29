@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Table } from "antd";
-import { BiEdit } from "react-icons/bi";
-import { AiFillDelete } from "react-icons/ai";
+import { getProducts } from "../features/product/productSlice";
+
 const columns = [
   {
     title: "No",
     dataIndex: "key",
   },
   {
-    title: "Name",
-    dataIndex: "name",
+    title: "Title",
+    dataIndex: "title",
   },
   {
     title: "Product",
@@ -20,17 +21,24 @@ const columns = [
     dataIndex: "status",
   },
 ];
-const data1 = [];
-for (let i = 0; i < 46; i++) {
-  data1.push({
-    key: i,
-    name: `Edward King ${i}`,
-    product: 32,
-    status: `London, Park Lane no. ${i}`,
-  });
-}
 
 const ProductList = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getProducts());
+  }, [dispatch]);
+  const productState = useSelector((state) => state.product.products);
+  const data1 = [];
+  if (productState) {
+    for (let i = 0; i < productState.length; i++) {
+      data1.push({
+        key: i + 1,
+        title: productState[i].title,
+        price: `$ ${productState[i].price}`,
+        status: `London, Park Lane no. ${i}`,
+      });
+    }
+  }
   return (
     <div>
       <h3 className="mb-4 title">Product List</h3>
