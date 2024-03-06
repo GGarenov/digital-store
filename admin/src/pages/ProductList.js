@@ -45,10 +45,13 @@ const ProductList = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProducts());
-  }, []);
+  }, [dispatch]);
+
   const productState = useSelector((state) => state.product?.products);
+  const isLoading = useSelector((state) => state.product?.isLoading);
+
   const data1 = [];
-  if (productState) {
+  if (!isLoading && productState) {
     for (let i = 0; i < productState.length; i++) {
       data1.push({
         key: i + 1,
@@ -70,6 +73,7 @@ const ProductList = () => {
       });
     }
   }
+
   return (
     <div>
       <h3 className="mb-4 title">Product List</h3>

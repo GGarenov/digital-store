@@ -33,6 +33,6 @@ router.put("/rating", authMiddleware, rating);
 router.put("/:id", authMiddleware, isAdmin, updateProduct);
 router.delete("/:id", authMiddleware, isAdmin, deleteProduct);
 router.delete("/delete-img/:id", authMiddleware, isAdmin, deleteImages);
-router.get("/product-list", getAllProducts);
+router.get("/", getAllProducts);
 
 module.exports = router;

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Table } from "antd";
-import { getUsers } from "../features/customers/customerSlice"; // replace 'path-to-your-action' with the actual path
+import { getUsers } from "../features/customers/customerSlice";
 const columns = [
   {
     title: "SNo",
