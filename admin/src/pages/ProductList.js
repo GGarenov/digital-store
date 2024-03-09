@@ -47,8 +47,8 @@ const ProductList = () => {
     dispatch(getProducts());
   }, [dispatch]);
 
-  const productState = useSelector((state) => state.product?.products);
-  const isLoading = useSelector((state) => state.product?.isLoading);
+  const productState = useSelector((state) => state.productReducer?.products);
+  const isLoading = useSelector((state) => state.productReducer?.isLoading);
 
   const data1 = [];
   if (!isLoading && productState) {
