@@ -1,34 +1,55 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { BiEdit } from "react-icons/bi";
+import { AiFillDelete } from "react-icons/ai";
+import { getBrands } from "../features/brand/brandSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { Table } from "antd";
 const columns = [
   {
-    title: "No",
+    title: "SNo",
     dataIndex: "key",
   },
   {
     title: "Name",
     dataIndex: "name",
+    sorter: (a, b) => a.name.length - b.name.length,
   },
   {
-    title: "Product",
-    dataIndex: "product",
-  },
-  {
-    title: "Status",
-    dataIndex: "status",
+    title: "Action",
+    dataIndex: "action",
   },
 ];
-const data1 = [];
-for (let i = 0; i < 46; i++) {
-  data1.push({
-    key: i,
-    name: `Edward King ${i}`,
-    product: 32,
-    status: `London, Park Lane no. ${i}`,
-  });
-}
 
 const BrandList = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getBrands());
+  }, []);
+  const brandState = useSelector((state) => state.brandReducer);
+  const data1 = [];
+  for (let i = 0; i < brandState.length; i++) {
+    data1.push({
+      key: i + 1,
+      name: brandState[i].title,
+      action: (
+        <>
+          <Link
+            to={`/admin/brand/${brandState[i]._id}`}
+            className=" fs-3 text-danger"
+          >
+            <BiEdit />
+          </Link>
+          <button
+            className="ms-3 fs-3 text-danger bg-transparent border-0"
+            // onClick={() => showModal(brandState[i]._id)}
+          >
+            <AiFillDelete />
+          </button>
+        </>
+      ),
+    });
+  }
   return (
     <div>
       <h3 className="mb-4 title">Brand List</h3>

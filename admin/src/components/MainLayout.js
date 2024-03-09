@@ -76,7 +76,7 @@ const MainLayout = () => {
                   label: "Brand",
                 },
                 {
-                  key: "list-brand",
+                  key: "brand-list",
                   icon: <SiBrandfolder className="fs-4" />,
                   label: "Brand List ",
                 },
