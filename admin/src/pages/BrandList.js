@@ -24,9 +24,19 @@ const columns = [
 const BrandList = () => {
   const dispatch = useDispatch();
   useEffect(() => {
+    console.log("Dispatching getBrands action");
     dispatch(getBrands());
   }, []);
-  const brandState = useSelector((state) => state.brandReducer);
+  const brandState = useSelector((state) => state.brandReducer.brands);
+
+  if (brandState.isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (brandState.isError) {
+    return <div>Error: {brandState.message}</div>;
+  }
+
   const data1 = [];
   for (let i = 0; i < brandState.length; i++) {
     data1.push({
@@ -50,6 +60,7 @@ const BrandList = () => {
       ),
     });
   }
+
   return (
     <div>
       <h3 className="mb-4 title">Brand List</h3>
@@ -59,5 +70,4 @@ const BrandList = () => {
     </div>
   );
 };
-
 export default BrandList;
