@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Table } from "antd";
 import { BiEdit } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
-import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
   deleteAProductCategory,
@@ -44,29 +44,31 @@ const Categorylist = () => {
     dispatch(resetState());
     dispatch(getCategories());
   }, []);
-  const pCatStat = useSelector((state) => state.pCategory);
-  const data1 = [];
-  for (let i = 0; i < pCatStat.length; i++) {
-    data1.push({
-      key: i + 1,
-      name: pCatStat[i].title,
-      action: (
-        <>
-          <Link
-            to={`/admin/category/${pCatStat[i]._id}`}
-            className=" fs-3 text-danger"
-          >
-            <BiEdit />
-          </Link>
-          <button
-            className="ms-3 fs-3 text-danger bg-transparent border-0"
-            onClick={() => showModal(pCatStat[i]._id)}
-          >
-            <AiFillDelete />
-          </button>
-        </>
-      ),
-    });
+  const pCatStat = useSelector((state) => state.pcategoryReducer.pCategories);
+  let data1 = [];
+  if (pCatStat) {
+    for (let i = 0; i < pCatStat.length; i++) {
+      data1.push({
+        key: i + 1,
+        name: pCatStat[i].title,
+        action: (
+          <>
+            <Link
+              to={`/admin/category/${pCatStat[i]._id}`}
+              className=" fs-3 text-danger"
+            >
+              <BiEdit />
+            </Link>
+            <button
+              className="ms-3 fs-3 text-danger bg-transparent border-0"
+              onClick={() => showModal(pCatStat[i]._id)}
+            >
+              <AiFillDelete />
+            </button>
+          </>
+        ),
+      });
+    }
   }
   const deleteCategory = (e) => {
     dispatch(deleteAProductCategory(e));
