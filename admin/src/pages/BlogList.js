@@ -30,7 +30,7 @@ const BlogList = () => {
   useEffect(() => {
     dispatch(getBlogs());
   }, []);
-  const getBlogState = useSelector((state) => state.blogReducer.blogss);
+  const getBlogState = useSelector((state) => state.blogReducer.blogs);
   const data1 = [];
   for (let i = 0; getBlogState && i < getBlogState.length; i++) {
     data1.push({
