@@ -347,7 +347,9 @@ const userCart = asyncHandler(async (req, res) => {
       object.count = cart[i].count;
       object.color = cart[i].color;
       //get price for creating total
-      const getPrice = await Product.findById(cart[i]._id).select("price").exec();
+      const getPrice = await Product.findById(cart[i]._id)
+        .select("price")
+        .exec();
       object.price = getPrice.price;
       products.push(object);
     }
@@ -372,7 +374,9 @@ const getUserCart = asyncHandler(async (req, res) => {
   const { _id } = req.user;
   validateMongodbId(_id);
   try {
-    const cart = await Cart.findOne({ orderedBy: _id }).populate("products.product");
+    const cart = await Cart.findOne({ orderedBy: _id }).populate(
+      "products.product"
+    );
     res.json(cart);
   } catch (error) {
     throw new Error(error);
@@ -405,8 +409,15 @@ const applyCoupon = asyncHandler(async (req, res) => {
   let { cartTotal } = await Cart.findOne({
     orderedBy: user._id,
   }).populate("products.product");
-  let totalAfterDiscount = (cartTotal - (cartTotal * validCoupon.discount) / 100).toFixed(2);
-  await Cart.findOneAndUpdate({ orderedBy: user._id }, { totalAfterDiscount }, { new: true });
+  let totalAfterDiscount = (
+    cartTotal -
+    (cartTotal * validCoupon.discount) / 100
+  ).toFixed(2);
+  await Cart.findOneAndUpdate(
+    { orderedBy: user._id },
+    { totalAfterDiscount },
+    { new: true }
+  );
   res.json(totalAfterDiscount);
 });
 
@@ -460,7 +471,9 @@ const getOrders = asyncHandler(async (req, res) => {
   const { _id } = req.user;
   validateMongodbId(_id);
   try {
-    const userOrders = await Order.findOne({ orderedBy: _id }).populate("products.product").exec();
+    const userOrders = await Order.findOne({ orderedBy: _id })
+      .populate("products.product", orderedBy)
+      .exec();
     res.json(userOrders);
   } catch (error) {
     throw new Error(error);
