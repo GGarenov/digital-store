@@ -44,7 +44,7 @@ const Orders = () => {
   for (let i = 0; i < orderState.length; i++) {
     data1.push({
       key: i + 1,
-      name: orderState[i].orderedBy.firstname,
+      name: orderState[i].orderedBy.firstName,
       product: (
         <Link to={`/admin/order/${orderState[i].orderedBy._id}`}>
           View Orders
