@@ -471,9 +471,12 @@ const getOrders = asyncHandler(async (req, res) => {
   const { _id } = req.user;
   validateMongodbId(_id);
   try {
-    const userOrders = await Order.findOne({ orderedBy: _id })
-      .populate("products.product", orderedBy)
+    const userOrders = await Order.find({ orderedBy: _id })
+      .populate("products.product")
+      .populate("orderedBy")
       .exec();
+    console.log(userOrders);
+
     res.json(userOrders);
   } catch (error) {
     throw new Error(error);
