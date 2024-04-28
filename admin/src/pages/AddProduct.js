@@ -5,22 +5,21 @@ import "react-quill/dist/quill.snow.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 let schema = Yup.object().shape({
-  email: Yup.string()
-    .email("Email should be valid bratle")
+  title: Yup.string()
+    .email("Title should be valid bratle")
     .required("Email e zaduljitelen"),
-  password: Yup.string().required("Bez parola ne moje"),
+  description: Yup.string().required("Description e zadaljitelen"),
 });
 
 const AddProduct = () => {
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      title: "",
+      description: "",
     },
     validationSchema: schema,
     onSubmit: (values) => {
-      dispatch(login(values));
-      alert(JSON.stringify(values, null, 2));
+      alert(JSON.stringify(values));
     },
   });
   const [desc, setDesc] = useState();
@@ -31,8 +30,17 @@ const AddProduct = () => {
     <div>
       <h3 className="mb-4 title">Add Product</h3>
       <div>
-        <form>
-          <CustomInput type="text" label="Enter Product Title" />
+        <form onSubmit={formik.handleSubmit}>
+          <CustomInput
+            type="text"
+            label="Enter Product Title"
+            name="title"
+            onChange={formik.handleChange("title")}
+            onBlur={formik.handleBlur("title")}
+          />
+          <div className="error">
+            {formik.touched.title && formik.errors.title}
+          </div>
           <div className="mb-3">
             <ReactQuill
               theme="snow"
