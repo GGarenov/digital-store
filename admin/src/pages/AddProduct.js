@@ -110,10 +110,30 @@ const AddProduct = () => {
           <div className="error">
             {formik.touched.category && formik.errors.category}
           </div>
-          <select name="" className="form-control py-3 mb-3" id="">
+          <select
+            name="color"
+            onChange={formik.handleChange("color")}
+            onBlur={formik.handleBlur("color")}
+            value={formik.values.color}
+            className="form-control py-3 mb-3"
+            id=""
+          >
             <option value="">Select Color</option>
           </select>
-          <CustomInput type="number" label="Enter Kolichestvo li kvo" />
+          <div className="error">
+            {formik.touched.color && formik.errors.color}
+          </div>
+          <CustomInput
+            type="number"
+            label="Enter Kolichestvo li kvo"
+            name="quantity"
+            onChange={formik.handleChange("quantity")}
+            onBlur={formik.handleBlur("quantity")}
+            value={formik.values.quantity}
+          />
+          <div className="error">
+            {formik.touched.quantity && formik.errors.quantity}
+          </div>
 
           <button
             className="btn btn-success border-0 rounded-3 my-5"
