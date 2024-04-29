@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CustomInput from "../components/CustomInput";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useDispatch, useSelector } from "react-redux";
+import { getBrands } from "../features/brand/brandSlice";
 let schema = Yup.object().shape({
   title: Yup.string()
     .email("Title should be valid bratle")
@@ -20,6 +22,14 @@ let schema = Yup.object().shape({
 });
 
 const AddProduct = () => {
+  const dispatch = useDispatch();
+  const [brand, setBrand] = useState([]);
+  useEffect(() => {
+    dispatch(getBrands());
+  }, [brand]);
+
+  const brandState = useSelector((state) => state.brandReducer.brands);
+
   const formik = useFormik({
     initialValues: {
       title: "",
@@ -92,6 +102,13 @@ const AddProduct = () => {
             id=""
           >
             <option value="">Select Brand</option>
+            {brandState.map((i, j) => {
+              return (
+                <option key={j} value={i.title}>
+                  {i.title}
+                </option>
+              );
+            })}
           </select>
           <div className="error">
             {formik.touched.brand && formik.errors.brand}
