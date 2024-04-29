@@ -6,6 +6,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { getBrands } from "../features/brand/brandSlice";
+import { getCategories } from "../features/pcategory/pcategorySlice";
 let schema = Yup.object().shape({
   title: Yup.string()
     .email("Title should be valid bratle")
@@ -26,9 +27,11 @@ const AddProduct = () => {
   const [brand, setBrand] = useState([]);
   useEffect(() => {
     dispatch(getBrands());
-  }, [brand]);
+    dispatch(getCategories());
+  }, []);
 
   const brandState = useSelector((state) => state.brandReducer.brands);
+  const pCatStat = useSelector((state) => state.pcategoryReducer.pCategories);
 
   const formik = useFormik({
     initialValues: {
@@ -123,6 +126,13 @@ const AddProduct = () => {
             id=""
           >
             <option value="">Select Category</option>
+            {pCatStat.map((i, j) => {
+              return (
+                <option key={j} value={i.title}>
+                  {i.title}
+                </option>
+              );
+            })}
           </select>
           <div className="error">
             {formik.touched.category && formik.errors.category}
