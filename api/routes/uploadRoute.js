@@ -11,7 +11,7 @@ const {
 const router = express.Router();
 
 router.post(
-  "/upload",
+  "/",
   authMiddleware,
   isAdmin,
   uploadPhoto.array("images", 10),

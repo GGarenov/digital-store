@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import uploadService from "./uploadService";
 
-export const uploadImg = createAsyncThunk(
+export const uploadImages = createAsyncThunk(
   "upload/images",
   async (data, thunkAPI) => {
     try {
@@ -9,22 +9,42 @@ export const uploadImg = createAsyncThunk(
       for (let i = 0; i < data.length; i++) {
         formData.append("images", data[i]);
       }
-      return await uploadService.uploadImg(formData);
+      const response = await uploadService.uploadImages(formData);
+      return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      if (error.response) {
+        return thunkAPI.rejectWithValue({
+          status: error.response.status,
+          message: error.response.data.message,
+        });
+      }
+      return thunkAPI.rejectWithValue({
+        message: "Unable to upload images. Please try again.",
+      });
     }
   }
 );
-export const delImg = createAsyncThunk(
+
+export const deleteImages = createAsyncThunk(
   "delete/images",
   async (id, thunkAPI) => {
     try {
-      return await uploadService.deleteImg(id);
+      const response = await uploadService.deleteImage(id);
+      return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      if (error.response) {
+        return thunkAPI.rejectWithValue({
+          status: error.response.status,
+          message: error.response.data.message,
+        });
+      }
+      return thunkAPI.rejectWithValue({
+        message: "Unable to delete image. Please try again.",
+      });
     }
   }
 );
+
 const initialState = {
   images: [],
   isError: false,
@@ -32,42 +52,44 @@ const initialState = {
   isSuccess: false,
   message: "",
 };
+
 export const uploadSlice = createSlice({
-  name: "imaegs",
+  name: "images",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(uploadImg.pending, (state) => {
+      .addCase(uploadImages.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(uploadImg.fulfilled, (state, action) => {
+      .addCase(uploadImages.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
         state.images = action.payload;
       })
-      .addCase(uploadImg.rejected, (state, action) => {
+      .addCase(uploadImages.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;
-        state.message = action.error;
+        state.message = action.error.message;
       })
-      .addCase(delImg.pending, (state) => {
+      .addCase(deleteImages.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(delImg.fulfilled, (state, action) => {
+      .addCase(deleteImages.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
         state.images = [];
       })
-      .addCase(delImg.rejected, (state, action) => {
+      .addCase(deleteImages.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;
-        state.message = action.payload;
+        state.message = action.error.message;
       });
   },
 });
+
 export default uploadSlice.reducer;
