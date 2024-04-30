@@ -1,5 +1,3 @@
-//Add product page
-
 import { React, useEffect, useState } from "react";
 import CustomInput from "../components/CustomInput";
 import ReactQuill from "react-quill";
@@ -14,7 +12,7 @@ import { getCategories } from "../features/pcategory/pcategorySlice";
 import { getColors } from "../features/color/colorSlice";
 import { Select } from "antd";
 import Dropzone from "react-dropzone";
-import { deleteImages, uploadImages } from "../features/upload/uploadSlice";
+import { delImg, uploadImg } from "../features/upload/uploadSlice";
 import { createProducts, resetState } from "../features/product/productSlice";
 let schema = yup.object().shape({
   title: yup.string().required("Title is Required"),
@@ -43,12 +41,11 @@ const Addproduct = () => {
   }, []);
 
   const brandState = useSelector((state) => state.brandReducer.brands);
-  const pCatStat = useSelector((state) => state.pcategoryReducer.pCategories);
+  const catState = useSelector((state) => state.pcategoryReducer.pCategories);
   const colorState = useSelector((state) => state.colorReducer.colors);
-  const imageState = useSelector((state) => state.uploadReducer.images);
+  const imgState = useSelector((state) => state.uploadReducer.images);
   const newProduct = useSelector((state) => state.productReducer);
   const { isSuccess, isError, isLoading, createdProduct } = newProduct;
-
   useEffect(() => {
     if (isSuccess && createdProduct) {
       toast.success("Product Added Successfullly!");
@@ -65,7 +62,7 @@ const Addproduct = () => {
     });
   });
   const img = [];
-  imageState.forEach((i) => {
+  imgState.forEach((i) => {
     img.push({
       public_id: i.public_id,
       url: i.url,
@@ -172,7 +169,7 @@ const Addproduct = () => {
             id=""
           >
             <option value="">Select Category</option>
-            {pCatStat.map((i, j) => {
+            {catState.map((i, j) => {
               return (
                 <option key={j} value={i.title}>
                   {i.title}
@@ -227,7 +224,7 @@ const Addproduct = () => {
           </div>
           <div className="bg-white border-1 p-5 text-center">
             <Dropzone
-              onDrop={(acceptedFiles) => dispatch(uploadImages(acceptedFiles))}
+              onDrop={(acceptedFiles) => dispatch(uploadImg(acceptedFiles))}
             >
               {({ getRootProps, getInputProps }) => (
                 <section>
@@ -242,12 +239,12 @@ const Addproduct = () => {
             </Dropzone>
           </div>
           <div className="showimages d-flex flex-wrap gap-3">
-            {imageState?.map((i, j) => {
+            {imgState?.map((i, j) => {
               return (
                 <div className=" position-relative" key={j}>
                   <button
                     type="button"
-                    onClick={() => dispatch(deleteImages(i.public_id))}
+                    onClick={() => dispatch(delImg(i.public_id))}
                     className="btn-close position-absolute"
                     style={{ top: "10px", right: "10px" }}
                   ></button>
