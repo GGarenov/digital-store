@@ -1,3 +1,5 @@
+//Add product page
+
 import { React, useEffect, useState } from "react";
 import CustomInput from "../components/CustomInput";
 import ReactQuill from "react-quill";

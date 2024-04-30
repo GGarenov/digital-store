@@ -1,3 +1,4 @@
+//Upload route for uploading images to the server
 const express = require("express");
 const {
   uploadImages,

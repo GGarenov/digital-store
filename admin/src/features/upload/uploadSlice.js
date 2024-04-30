@@ -1,3 +1,5 @@
+//Upload slice
+
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import uploadService from "./uploadService";
 
