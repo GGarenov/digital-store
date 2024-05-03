@@ -10,7 +10,10 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { createBlog } from "../features/blogs/blogSlice";
-import { getCategories } from "../features/bcategory/bcategorySlice";
+import {
+  getCategories,
+  resetState,
+} from "../features/bcategory/bcategorySlice";
 let schema = yup.object().shape({
   title: yup.string().required("Title is Required"),
   description: yup.string().required("Description is Required"),
@@ -63,7 +66,7 @@ const AddBlog = () => {
       dispatch(createBlog(values));
       formik.resetForm();
       setTimeout(() => {
-        navigate("/admin/blog-list");
+        dispatch(resetState());
       }, 3000);
     },
   });
