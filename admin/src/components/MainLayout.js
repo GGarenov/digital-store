@@ -130,7 +130,7 @@ const MainLayout = () => {
               label: "Blogs",
               children: [
                 {
-                  key: "blog",
+                  key: "add-blog",
                   icon: <ImBlog className="fs-4" />,
                   label: "Add Blog",
                 },
