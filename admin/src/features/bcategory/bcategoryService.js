@@ -8,8 +8,19 @@ const getBlogCategories = async () => {
   return response.data;
 };
 
+const createBlogCategory = async (blogCategory) => {
+  const response = await axios.post(
+    `${base_url}blogcategory/`,
+    blogCategory,
+    config
+  );
+
+  return response.data;
+};
+
 const bcategoryService = {
   getBlogCategories,
+  createBlogCategory,
 };
 
 export default bcategoryService;
