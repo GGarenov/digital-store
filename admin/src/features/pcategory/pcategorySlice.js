@@ -52,6 +52,7 @@ export const getAProductCategory = createAsyncThunk(
     }
   }
 );
+
 export const resetState = createAction("RevertAll");
 
 const initialState = {
