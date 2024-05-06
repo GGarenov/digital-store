@@ -2,13 +2,15 @@ import { React, useEffect } from "react";
 
 import CustomInput from "../components/CustomInput";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import {
   createNewblogCat,
   resetState,
+  getABlogCat,
+  updateABlogCat,
 } from "../features/bcategory/bcategorySlice";
 
 let schema = yup.object().shape({
@@ -17,34 +19,67 @@ let schema = yup.object().shape({
 
 const AddBlogCategory = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
   const navigate = useNavigate();
+  const getBlogCatId = location.pathname.split("/")[3];
   const newBlog = useSelector((state) => state.bcategoryReducer);
-  const { isSuccess, isError, isLoading, createBlogCategory } = newBlog;
+  const {
+    isSuccess,
+    isError,
+    isLoading,
+    createBlogCategory,
+    blogCatName,
+    updatedBlogCategory,
+  } = newBlog;
+
+  useEffect(() => {
+    if (getBlogCatId !== undefined) {
+      dispatch(getABlogCat(getBlogCatId));
+    } else {
+      dispatch(resetState());
+    }
+  }, [getBlogCatId]);
+
   useEffect(() => {
     if (isSuccess && createBlogCategory) {
       toast.success("Blog Category Added Successfullly!");
     }
+
+    if (updatedBlogCategory && isSuccess) {
+      toast.success("Blog Category Updated Successfully!");
+      navigate("/admin/blog-category-list");
+    }
+
     if (isError) {
       toast.error("Something Went Wrong!");
     }
   }, [isSuccess, isError, isLoading]);
 
   const formik = useFormik({
+    enableReinitialize: true,
     initialValues: {
-      title: "",
+      title: blogCatName || "",
     },
     validationSchema: schema,
     onSubmit: (values) => {
-      dispatch(createNewblogCat(values));
-      formik.resetForm();
-      setTimeout(() => {
-        dispatch(resetState());
-      }, 3000);
+      if (getBlogCatId !== undefined) {
+        const data = { id: getBlogCatId, blogCatData: values };
+        dispatch(updateABlogCat(data));
+      } else {
+        dispatch(createNewblogCat(values));
+
+        formik.resetForm();
+        setTimeout(() => {
+          dispatch(resetState());
+        }, 300);
+      }
     },
   });
   return (
     <div>
-      <h3 className="mb-4 title">Add Blog Category</h3>
+      <h3 className="mb-4 title">
+        {getBlogCatId !== undefined ? "Edit" : "Add"} Blog Category
+      </h3>
       <div>
         <form action="" onSubmit={formik.handleSubmit}>
           <CustomInput
@@ -59,7 +94,7 @@ const AddBlogCategory = () => {
             {formik.touched.title && formik.errors.title}
           </div>
           <button className="btn btn-success border-0 rounded-3" type="submit">
-            Add Blog Category
+            {getBlogCatId !== undefined ? "Edit" : "Add"} Blog Category
           </button>
         </form>
       </div>

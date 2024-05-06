@@ -41,8 +41,8 @@ const Blogcatlist = () => {
   };
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(resetState());
     dispatch(getCategories());
+    dispatch(resetState());
   }, []);
   const bCatState = useSelector((state) => state.bcategoryReducer.bCategories);
 
