@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import CustomInput from "../components/CustomInput";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -9,11 +9,14 @@ import { toast } from "react-toastify";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { createBlog } from "../features/blogs/blogSlice";
 import {
-  getCategories,
+  createBlog,
+  getABlog,
   resetState,
-} from "../features/bcategory/bcategorySlice";
+  updateABlog,
+} from "../features/blogs/blogSlice";
+import { getCategories } from "../features/bcategory/bcategorySlice";
+
 let schema = yup.object().shape({
   title: yup.string().required("Title is Required"),
   description: yup.string().required("Description is Required"),
@@ -23,20 +26,45 @@ let schema = yup.object().shape({
 const AddBlog = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [images, setImages] = useState([]);
-
-  useEffect(() => {
-    dispatch(getCategories());
-  }, []);
-
+  const location = useLocation();
+  const getBlogId = location.pathname.split("/")[3];
   const imgState = useSelector((state) => state.uploadReducer.images);
   const bCatState = useSelector((state) => state.bcategoryReducer.bCategories);
   const blogState = useSelector((state) => state.blogReducer.blogs);
+  const [images, setImages] = useState([]);
+  const {
+    isSuccess,
+    isError,
+    isLoading,
+    createdBlog,
+    blogName,
+    blogDesc,
+    blogCategory,
+    blogImages,
+    updatedBlog,
+  } = blogState;
 
-  const { isSuccess, isError, isLoading, createdBlog } = blogState;
+  useEffect(() => {
+    if (getBlogId !== undefined) {
+      dispatch(getABlog(getBlogId));
+      img.push(blogImages);
+    } else {
+      dispatch(resetState());
+    }
+  }, [getBlogId]);
+
+  useEffect(() => {
+    dispatch(resetState());
+    dispatch(getCategories());
+  }, []);
+
   useEffect(() => {
     if (isSuccess && createdBlog) {
       toast.success("Blog Added Successfullly!");
+    }
+    if (isSuccess && updatedBlog) {
+      toast.success("Blog Updated Successfullly!");
+      navigate("/admin/blog-list");
     }
     if (isError) {
       toast.error("Something Went Wrong!");
@@ -50,30 +78,40 @@ const AddBlog = () => {
       url: i.url,
     });
   });
-
+  console.log(img);
   useEffect(() => {
     formik.values.images = img;
-  }, [img]);
+  }, [blogImages]);
+
   const formik = useFormik({
+    enableReinitialize: true,
     initialValues: {
-      title: "",
-      description: "",
-      category: "",
+      title: blogName || "",
+      description: blogDesc || "",
+      category: blogCategory || "",
       images: "",
     },
     validationSchema: schema,
     onSubmit: (values) => {
-      dispatch(createBlog(values));
-      formik.resetForm();
-      setTimeout(() => {
+      if (getBlogId !== undefined) {
+        const data = { id: getBlogId, blogData: values };
+        dispatch(updateABlog(data));
         dispatch(resetState());
-      }, 3000);
+      } else {
+        dispatch(createBlog(values));
+        formik.resetForm();
+        setTimeout(() => {
+          dispatch(resetState());
+        }, 300);
+      }
     },
   });
 
   return (
     <div>
-      <h3 className="mb-4 title">Add Blog</h3>
+      <h3 className="mb-4 title">
+        {getBlogId !== undefined ? "Edit" : "Add"} Blog
+      </h3>
 
       <div className="">
         <form action="" onSubmit={formik.handleSubmit}>
@@ -152,8 +190,11 @@ const AddBlog = () => {
               );
             })}
           </div>
-          <button className="btn btn-success border-0 rounded-3" type="submit">
-            Add Blog
+          <button
+            className="btn btn-success border-0 rounded-3 my-5"
+            type="submit"
+          >
+            {getBlogId !== undefined ? "Edit" : "Add"} Blog
           </button>
         </form>
       </div>
