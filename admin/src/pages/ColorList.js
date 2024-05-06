@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteAColor, getColors } from "../features/color/colorSlice";
 import { BiEdit } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import CustomModal from "../components/CustomModal";
+import {
+  deleteAColor,
+  getColors,
+  resetState,
+} from "../features/color/colorSlice";
 
 const columns = [
   {
@@ -35,9 +39,11 @@ const Colorlist = () => {
   };
   const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(resetState());
     dispatch(getColors());
   }, []);
   const colorState = useSelector((state) => state.colorReducer.colors);
+
   const data1 = [];
   for (let i = 0; i < colorState.length; i++) {
     data1.push({
