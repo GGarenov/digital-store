@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { BiEdit } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
-import { deleteABrand, getBrands } from "../features/brand/brandSlice";
+import {
+  deleteABrand,
+  getBrands,
+  resetState,
+} from "../features/brand/brandSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Table } from "antd";
 import CustomModal from "../components/CustomModal";
-import { set } from "mongoose";
 const columns = [
   {
     title: "SNo",
@@ -37,18 +40,10 @@ const BrandList = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log("Dispatching getBrands action");
     dispatch(getBrands());
+    dispatch(resetState());
   }, []);
   const brandState = useSelector((state) => state.brandReducer.brands);
-
-  if (brandState.isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (brandState.isError) {
-    return <div>Error: {brandState.message}</div>;
-  }
 
   const data1 = [];
   for (let i = 0; i < brandState.length; i++) {
