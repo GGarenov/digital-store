@@ -135,6 +135,7 @@ export const couponSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
+        state.updatedCoupon = action.payload;
         state.couponName = action.payload.name;
         state.couponDiscount = action.payload.discount;
         state.couponExpiry = action.payload.expiry;

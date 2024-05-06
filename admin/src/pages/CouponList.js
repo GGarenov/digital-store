@@ -54,6 +54,7 @@ const Couponlist = () => {
     dispatch(getAllCoupon());
     dispatch(resetState());
   }, []);
+
   const couponState = useSelector((state) => state.couponReducer.coupons);
   const data1 = [];
   for (let i = 0; i < couponState.length; i++) {
@@ -90,7 +91,7 @@ const Couponlist = () => {
   };
   return (
     <div>
-      <h3 className="mb-4 title">Coupons</h3>
+      <h3 className="mb-4 title">Coupons List</h3>
       <div>
         <Table columns={columns} dataSource={data1} />
       </div>

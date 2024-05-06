@@ -20,9 +20,9 @@ let schema = yup.object().shape({
 const AddCoupon = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const getCouponId = location.pathname.split("/")[3];
   const navigate = useNavigate();
-  const newCoupon = useSelector((state) => state.couponReducer.coupons);
+  const getCouponId = location.pathname.split("/")[3];
+  const newCoupon = useSelector((state) => state.couponReducer);
 
   const {
     isSuccess,
@@ -35,11 +35,11 @@ const AddCoupon = () => {
     updatedCoupon,
   } = newCoupon;
   const changeDateFormet = (date) => {
-    const newDate = new Date(date);
-    if (isNaN(newDate)) {
+    if (isNaN(Date.parse(date))) {
       return "";
     }
-    const [month, day, year] = newDate.toLocaleDateString().split("/");
+    const newDate = new Date(date).toLocaleDateString();
+    const [month, day, year] = newDate.split("/");
     return [year, month, day].join("-");
   };
 
@@ -59,7 +59,7 @@ const AddCoupon = () => {
       toast.success("Coupon Updated Successfullly!");
       navigate("/admin/coupon-list");
     }
-    if (isError && couponName && couponDiscount && couponExpiry) {
+    if (isError) {
       toast.error("Something Went Wrong!");
     }
   }, [isSuccess, isError, isLoading]);
@@ -75,7 +75,6 @@ const AddCoupon = () => {
       if (getCouponId !== undefined) {
         const data = { id: getCouponId, couponData: values };
         dispatch(updateACoupon(data));
-        dispatch(resetState());
       } else {
         dispatch(createCoupon(values));
         formik.resetForm();
