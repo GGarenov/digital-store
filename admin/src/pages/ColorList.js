@@ -39,8 +39,8 @@ const Colorlist = () => {
   };
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(resetState());
     dispatch(getColors());
+    dispatch(resetState());
   }, []);
   const colorState = useSelector((state) => state.colorReducer.colors);
 

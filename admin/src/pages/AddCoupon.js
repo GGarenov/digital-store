@@ -20,8 +20,8 @@ let schema = yup.object().shape({
 const AddCoupon = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const navigate = useNavigate();
   const getCouponId = location.pathname.split("/")[3];
+  const navigate = useNavigate();
   const newCoupon = useSelector((state) => state.couponReducer.coupons);
 
   const {
@@ -35,8 +35,11 @@ const AddCoupon = () => {
     updatedCoupon,
   } = newCoupon;
   const changeDateFormet = (date) => {
-    const newDate = new Date(date).toLocaleDateString();
-    const [month, day, year] = newDate.split("/");
+    const newDate = new Date(date);
+    if (isNaN(newDate)) {
+      return "";
+    }
+    const [month, day, year] = newDate.toLocaleDateString().split("/");
     return [year, month, day].join("-");
   };
 
