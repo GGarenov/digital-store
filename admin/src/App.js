@@ -23,6 +23,7 @@ import AddBrand from "./pages/AddBrand";
 import AddProduct from "./pages/AddProduct";
 import CouponList from "./pages/CouponList";
 import AddCoupon from "./pages/AddCoupon";
+import ViewEnq from "./pages/ViewEnq";
 
 function App() {
   return (
@@ -34,10 +35,11 @@ function App() {
         <Route path="/admin" element={<MainLayout />}>
           <Route index element={<Dashboard />} />
           <Route path="enquiries" element={<Enquiries />} />
+          <Route path="enquiries/:id" element={<ViewEnq />} />
           <Route path="blog-list" element={<BlogList />} />
           <Route path="coupon-list" element={<CouponList />} />
           <Route path="coupon" element={<AddCoupon />} />
-          <Route path="coupon/:id" element={<AddCoupon />} />
+          <Route path="coupon/:id" element={<ViewEnq />} />
           <Route path="blog" element={<AddBlog />} />
           <Route path="blog/:id" element={<AddBlog />} />
           <Route path="blog-category-list" element={<BlogCatList />} />
