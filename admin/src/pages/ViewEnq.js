@@ -14,6 +14,7 @@ const ViewEnq = () => {
   const navigate = useNavigate();
   const getEnqId = location.pathname.split("/")[3];
   const enqState = useSelector((state) => state.enquiryReducer.enquiries);
+
   const {
     name: enqName,
     mobile: enqMobile,
