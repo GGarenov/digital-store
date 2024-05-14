@@ -15,27 +15,36 @@ const ViewEnq = () => {
   const getEnqId = location.pathname.split("/")[3];
   const enqState = useSelector((state) => state.enquiryReducer.enquiries);
 
+  const enq = enqState.find((enquiry) => enquiry._id === getEnqId);
+
   const {
     name: enqName,
     mobile: enqMobile,
     email: enqEmail,
     comment: enqComment,
     status: enqStatus,
-  } = enqState[0];
+  } = enq || {};
   useEffect(() => {
-    dispatch(getAEnquiry(getEnqId));
-  }, [getEnqId]);
+    dispatch(getAEnquiry(getEnqId))
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [getEnqId, dispatch]);
+
   const goBack = () => {
     navigate(-1);
   };
+
   const setEnquiryStatus = (e, i) => {
     console.log(e, i);
     const data = { id: i, enqData: e };
-    dispatch(updateAEnquiry(data));
-    dispatch(resetState());
-    setTimeout(() => {
+    dispatch(updateAEnquiry(data)).then(() => {
+      dispatch(resetState());
       dispatch(getAEnquiry(getEnqId));
-    }, 100);
+    });
   };
   return (
     <div>
