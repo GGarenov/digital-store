@@ -25,6 +25,12 @@ const MainLayout = () => {
     token: { colorBgContainer },
   } = theme.useToken();
   const navigate = useNavigate();
+
+  const signout = () => {
+    localStorage.removeItem("token");
+    navigate("/");
+  };
+
   return (
     <Layout /* onContextMenu={(e) => e.preventDefault()} */>
       <Sider trigger={null} collapsible collapsed={collapsed}>
@@ -40,6 +46,7 @@ const MainLayout = () => {
           defaultSelectedKeys={[""]}
           onClick={({ key }) => {
             if (key == "signout") {
+              signout();
             } else {
               navigate(key);
             }
