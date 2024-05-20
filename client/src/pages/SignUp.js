@@ -15,10 +15,34 @@ const SignUp = () => {
             <div className="auth-card">
               <h3 className="text-center mb-3">Create Account</h3>
               <form className="d-flex flex-column gap-15" action="">
-                <CustomInput type="text" name="name" placeholder="Name" />
-                <CustomInput type="email" name="email" className="form-control" placeholder="email" />
-                <CustomInput type="tel" name="mobile" className="form-control" placeholder="Mobile number" />
-                <CustomInput type="password" name="password" className="form-control" placeholder="password" />
+                <CustomInput
+                  type="text"
+                  name="firstName"
+                  placeholder="First Name"
+                />
+                <CustomInput
+                  type="text"
+                  name="lastName"
+                  placeholder="Last Name"
+                />
+                <CustomInput
+                  type="email"
+                  name="email"
+                  className="form-control"
+                  placeholder="email"
+                />
+                <CustomInput
+                  type="tel"
+                  name="mobile"
+                  className="form-control"
+                  placeholder="Mobile number"
+                />
+                <CustomInput
+                  type="password"
+                  name="password"
+                  className="form-control"
+                  placeholder="password"
+                />
 
                 <div>
                   <div className="mt-3 d-flex justify-content-center gap-20 align-items-center">
