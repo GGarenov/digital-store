@@ -45,11 +45,18 @@ const SignUp = () => {
           <div className="col-12">
             <div className="auth-card">
               <h3 className="text-center mb-3">Create Account</h3>
-              <form className="d-flex flex-column gap-15" action="">
+              <form
+                className="d-flex flex-column gap-15"
+                action=""
+                onSubmit={formik.handleSubmit}
+              >
                 <CustomInput
                   type="text"
                   name="firstName"
                   placeholder="First Name"
+                  value={formik.values.firstName}
+                  onChange={formik.handleChange("firstName")}
+                  onBlur={formik.handleBlur("firstName")}
                 />
                 <CustomInput
                   type="text"
