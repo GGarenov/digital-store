@@ -45,7 +45,11 @@ const SignUp = () => {
           <div className="col-12">
             <div className="auth-card">
               <h3 className="text-center mb-3">Create Account</h3>
-              <form className="d-flex flex-column gap-15" action="">
+              <form
+                action=""
+                onSubmit={formik.handleSubmit}
+                className="d-flex flex-column gap-15"
+              >
                 <CustomInput
                   type="text"
                   name="firstName"
