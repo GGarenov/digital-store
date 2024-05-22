@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import BreadCrumb from "../components/BreadCrumb";
 import Meta from "../components/Meta";
 import ReactStars from "react-rating-stars-component";
-import { useState } from "react";
 import ProductCard from "../components/ProductCard";
 import Color from "../components/Color";
 import Container from "../components/Container";
@@ -11,7 +10,9 @@ import { getAllProducts } from "../features/products/productSlice";
 
 const Store = () => {
   const [grid, setGrid] = useState(4);
+  const [sortOption, setSortOption] = useState("best-selling");
   const productState = useSelector((state) => state.product.product);
+  console.log(productState);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -199,11 +200,15 @@ const Store = () => {
                   <p className="mb-0 d-block" style={{ width: "100px" }}>
                     Sort By:
                   </p>
-                  <select name="" className="form-control form-select" id="">
+                  <select
+                    name=""
+                    className="form-control form-select"
+                    id=""
+                    value={sortOption}
+                    onChange={(e) => setSortOption(e.target.value)}
+                  >
                     <option value="manual">Featured</option>
-                    <option value="best-selling" selected="selected">
-                      Best Selling
-                    </option>
+                    <option value="best-selling">Best Selling</option>
                     <option value="title-ascending">Alphabetically, A-Z</option>
                     <option value="title-descending">
                       Alphabetically, Z-A
