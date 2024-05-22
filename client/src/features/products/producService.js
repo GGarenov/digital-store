@@ -17,4 +17,5 @@ const addToWishlist = async (userData) => {
 
 export const productService = {
   getProducts,
+  addToWishlist,
 };
