@@ -20,6 +20,7 @@ const Store = () => {
   }, []);
   const getProducts = () => {
     dispatch(getAllProducts());
+    console.log("After dispatch: ", productState);
   };
 
   return (
