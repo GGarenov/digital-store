@@ -20,7 +20,7 @@ const createProduct = asyncHandler(async (req, res) => {
 //Update product
 const updateProduct = asyncHandler(async (req, res) => {
   const id = req.params.id;
-  validateMongoDbId(id);
+  validateMongodbId(id);
   try {
     if (req.body.title) {
       req.body.slug = slugify(req.body.title);
@@ -51,7 +51,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
 //Get single product
 const getSingleProduct = asyncHandler(async (req, res) => {
   const { id } = req.params;
-  validateMongoDbId(id);
+  validateMongodbId(id);
   try {
     const findProduct = await Product.findById(id);
     res.json(findProduct);
