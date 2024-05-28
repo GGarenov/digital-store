@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import BreadCrumb from "../components/BreadCrumb";
 import Meta from "../components/Meta";
 import Container from "../components/Container";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserProductWishlist } from "../features/user/userSlice";
 
 const Wishlist = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    getWishlistFromDb();
+  }, []);
+  const getWishlistFromDb = () => {
+    dispatch(getUserProductWishlist());
+  };
+  const wishlistState = useSelector((state) => state.auth.wishlist);
+
   return (
     <>
       <Meta title={"Wishlist"} />
@@ -12,36 +23,66 @@ const Wishlist = () => {
         <div className="row">
           <div className="col-3">
             <div className="wishlist-card position-relative">
-              <img src="images/cross.svg" alt="cross" className="position-absolute cross img-fluid" />
+              <img
+                src="images/cross.svg"
+                alt="cross"
+                className="position-absolute cross img-fluid"
+              />
               <div className="wishlist-card-image">
-                <img src="images/watch.jpg" className="img-fluid w-100" alt="watch" />
+                <img
+                  src="images/watch.jpg"
+                  className="img-fluid w-100"
+                  alt="watch"
+                />
               </div>
               <div className="py-3 px-3">
-                <h5 className="title">HonorT1 7.0 1GB RAM 8 GB ROM 7 Inch With Wi-Fi+5G Tablet</h5>
+                <h5 className="title">
+                  HonorT1 7.0 1GB RAM 8 GB ROM 7 Inch With Wi-Fi+5G Tablet
+                </h5>
                 <h6 className="price">$100</h6>
               </div>
             </div>
           </div>
           <div className="col-3">
             <div className="wishlist-card position-relative">
-              <img src="images/cross.svg" alt="cross" className="position-absolute cross img-fluid" />
+              <img
+                src="images/cross.svg"
+                alt="cross"
+                className="position-absolute cross img-fluid"
+              />
               <div className="wishlist-card-image">
-                <img src="images/watch.jpg" className="img-fluid w-100" alt="watch" />
+                <img
+                  src="images/watch.jpg"
+                  className="img-fluid w-100"
+                  alt="watch"
+                />
               </div>
               <div className="py-3 px-3">
-                <h5 className="title">HonorT1 7.0 1GB RAM 8 GB ROM 7 Inch With Wi-Fi+5G Tablet</h5>
+                <h5 className="title">
+                  HonorT1 7.0 1GB RAM 8 GB ROM 7 Inch With Wi-Fi+5G Tablet
+                </h5>
                 <h6 className="price">$100</h6>
               </div>
             </div>
           </div>
           <div className="col-3">
             <div className="wishlist-card position-relative">
-              <img src="images/cross.svg" alt="cross" className="position-absolute cross img-fluid" />
+              <img
+                src="images/cross.svg"
+                alt="cross"
+                className="position-absolute cross img-fluid"
+              />
               <div className="wishlist-card-image">
-                <img src="images/watch.jpg" className="img-fluid w-100" alt="watch" />
+                <img
+                  src="images/watch.jpg"
+                  className="img-fluid w-100"
+                  alt="watch"
+                />
               </div>
               <div className="py-3 px-3">
-                <h5 className="title">HonorT1 7.0 1GB RAM 8 GB ROM 7 Inch With Wi-Fi+5G Tablet</h5>
+                <h5 className="title">
+                  HonorT1 7.0 1GB RAM 8 GB ROM 7 Inch With Wi-Fi+5G Tablet
+                </h5>
                 <h6 className="price">$100</h6>
               </div>
             </div>
