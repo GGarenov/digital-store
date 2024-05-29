@@ -21,7 +21,12 @@ const login = async (userData) => {
 };
 
 const getUserWishlist = async () => {
-  const response = await axios.get(`${base_url}user/wishlist`, config);
+  const user = JSON.parse(localStorage.getItem("customer"));
+  const response = await axios.get(`${base_url}user/wishlist`, {
+    headers: {
+      Authorization: `Bearer ${user.token}`,
+    },
+  });
   if (response.data) {
     return response.data;
   }
