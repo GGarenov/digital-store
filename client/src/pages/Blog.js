@@ -9,6 +9,7 @@ import moment from "moment";
 
 const Blog = () => {
   const blogState = useSelector((state) => state.blog.blog);
+
   const dispatch = useDispatch();
   useEffect(() => {
     getBlogs();
@@ -39,19 +40,20 @@ const Blog = () => {
           </div>
           <div className="col-9">
             <div className="row">
-              {blogState.map((item, index) => {
-                return (
-                  <div className="col-6 mb-3" key={index}>
-                    <BlogCard
-                      id={item._id}
-                      title={item.title}
-                      description={item.description}
-                      image={item.images[0]?.url}
-                      date={moment(item.created_at).format("MMM DD, YYYY")}
-                    />
-                  </div>
-                );
-              })}
+              {Array.isArray(blogState) &&
+                blogState.map((item, index) => {
+                  return (
+                    <div className="col-6 mb-3" key={index}>
+                      <BlogCard
+                        id={item._id}
+                        title={item.title}
+                        description={item.description}
+                        image={item.images[0]?.url}
+                        date={moment(item.createdAt).format("MMM DD, YYYY")}
+                      />
+                    </div>
+                  );
+                })}
             </div>
           </div>
         </div>
