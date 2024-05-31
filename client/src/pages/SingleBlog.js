@@ -33,7 +33,11 @@ const SingleBlog = () => {
                 <HiOutlineArrowLeft className="fs-4" /> Back
               </Link>
               <h3 className="title">{blogState?.title}</h3>
-              <img src={blog} alt="blog" className="img-fluid w-100 my-4" />
+              <img
+                src={blogState?.images[0].url ? blogState?.images[0].url : blog}
+                alt="blog"
+                className="img-fluid w-100 my-4"
+              />
               <p
                 dangerouslySetInnerHTML={{
                   __html: blogState?.description,
