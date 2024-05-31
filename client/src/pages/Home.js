@@ -1,19 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Marquee from "react-fast-marquee";
 import BlogCard from "../components/BlogCard";
 import ProductCard from "../components/ProductCard";
 import Container from "../components/Container";
 import { services } from "../utils/Data";
-
+import moment from "moment";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllBlogs } from "../features/blogs/blogSlice";
 const Home = () => {
+  const blogState = useSelector((state) => state.blog.blog);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    getBlogs();
+  }, []);
+
+  const getBlogs = () => {
+    dispatch(getAllBlogs());
+  };
   return (
     <>
       <Container class1="home-wrapper-1 py-5">
         <div className="row">
           <div className="col-6">
             <div className="main-banner position-relative p-3">
-              <img src="images/main-banner-1.jpg" className="img-fluid rounded-3" alt="main-banner" />
+              <img
+                src="images/main-banner-1.jpg"
+                className="img-fluid rounded-3"
+                alt="main-banner"
+              />
               <div className="main-banner-content position-absolute">
                 <h4>Best Offer</h4>
                 <h5>iPhone 15 Pro</h5>
@@ -25,7 +41,11 @@ const Home = () => {
           <div className="col-6">
             <div className="d-flex flex-wrap gap-10 justify-content-between align-items-center">
               <div className="small-banner position-relative">
-                <img src="images/catbanner-01.jpg" className="img-fluid rounded-3" alt="main-banner" />
+                <img
+                  src="images/catbanner-01.jpg"
+                  className="img-fluid rounded-3"
+                  alt="main-banner"
+                />
                 <div className="small-banner-content position-absolute">
                   <h4>BEST OFFER</h4>
                   <h5>Gaming Laptops</h5>
@@ -35,7 +55,11 @@ const Home = () => {
                 </div>
               </div>
               <div className="small-banner position-relative">
-                <img src="images/catbanner-02.jpg" className="img-fluid rounded-3" alt="main-banner" />
+                <img
+                  src="images/catbanner-02.jpg"
+                  className="img-fluid rounded-3"
+                  alt="main-banner"
+                />
                 <div className="small-banner-content position-absolute">
                   <h4>New Arrivals</h4>
                   <h5>Buy IPad Air</h5>
@@ -45,7 +69,11 @@ const Home = () => {
                 </div>
               </div>
               <div className="small-banner position-relative">
-                <img src="images/catbanner-03.jpg" className="img-fluid rounded-3" alt="main-banner" />
+                <img
+                  src="images/catbanner-03.jpg"
+                  className="img-fluid rounded-3"
+                  alt="main-banner"
+                />
                 <div className="small-banner-content position-absolute">
                   <h4>30% OFF</h4>
                   <h5>Smartwatch 7</h5>
@@ -55,7 +83,11 @@ const Home = () => {
                 </div>
               </div>
               <div className="small-banner position-relative">
-                <img src="images/catbanner-04.jpg" className="img-fluid rounded-3" alt="main-banner" />
+                <img
+                  src="images/catbanner-04.jpg"
+                  className="img-fluid rounded-3"
+                  alt="main-banner"
+                />
                 <div className="small-banner-content position-absolute">
                   <h4>FREE DELIVERY</h4>
                   <h5>AirPods Max</h5>
@@ -170,7 +202,11 @@ const Home = () => {
         <div className="row">
           <div className="col-3">
             <div className="famous-card position-relative">
-              <img src="images/famous-01.webp" className="img-fluid" alt="famous" />
+              <img
+                src="images/famous-01.webp"
+                className="img-fluid"
+                alt="famous"
+              />
               <div className="famous-content position-absolute">
                 <h5>Big Screen</h5>
                 <h6>Smart Watch Series 7</h6>
@@ -180,7 +216,11 @@ const Home = () => {
           </div>
           <div className="col-3">
             <div className="famous-card position-relative">
-              <img src="images/famous-02.webp" className="img-fluid" alt="famous" />
+              <img
+                src="images/famous-02.webp"
+                className="img-fluid"
+                alt="famous"
+              />
               <div className="famous-content position-absolute">
                 <h5 className="text-dark">Studio Display</h5>
                 <h6 className="text-dark">600 nits of brightness</h6>
@@ -190,7 +230,11 @@ const Home = () => {
           </div>
           <div className="col-3">
             <div className="famous-card position-relative">
-              <img src="images/famous-03.webp" className="img-fluid" alt="famous" />
+              <img
+                src="images/famous-03.webp"
+                className="img-fluid"
+                alt="famous"
+              />
               <div className="famous-content position-absolute">
                 <h5 className="text-dark">Studio Display</h5>
                 <h6 className="text-dark">600 nits of brightness</h6>
@@ -200,7 +244,11 @@ const Home = () => {
           </div>
           <div className="col-3">
             <div className="famous-card position-relative">
-              <img src="images/famous-04.webp" className="img-fluid" alt="famous" />
+              <img
+                src="images/famous-04.webp"
+                className="img-fluid"
+                alt="famous"
+              />
               <div className="famous-content position-absolute">
                 <h5 className="text-dark">Studio Display</h5>
                 <h6 className="text-dark">600 nits of brightness</h6>
@@ -275,18 +323,22 @@ const Home = () => {
           </div>
         </div>
         <div className="row">
-          <div className="col-3">
-            <BlogCard />
-          </div>
-          <div className="col-3">
-            <BlogCard />
-          </div>
-          <div className="col-3">
-            <BlogCard />
-          </div>
-          <div className="col-3">
-            <BlogCard />
-          </div>
+          {Array.isArray(blogState) &&
+            blogState.map((item, index) => {
+              if (index < 4) {
+                return (
+                  <div className="col-3" key={index}>
+                    <BlogCard
+                      id={item._id}
+                      title={item.title}
+                      description={item.description}
+                      image={item.images[0]?.url}
+                      date={moment(item.createdAt).format("MMM DD, YYYY")}
+                    />
+                  </div>
+                );
+              }
+            })}
         </div>
       </Container>
     </>
