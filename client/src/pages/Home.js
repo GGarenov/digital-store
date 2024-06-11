@@ -10,6 +10,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllBlogs } from "../features/blogs/blogSlice";
 const Home = () => {
   const blogState = useSelector((state) => state.blog.blog);
+  const productState = useSelector((state) => state.product.product);
+  console.log(productState);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -19,6 +21,11 @@ const Home = () => {
   const getBlogs = () => {
     dispatch(getAllBlogs());
   };
+
+  const getProducts = () => {
+    dispatch(getProducts());
+  };
+
   return (
     <>
       <Container class1="home-wrapper-1 py-5">
