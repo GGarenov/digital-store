@@ -27,14 +27,11 @@ const Home = () => {
   };
 
   const getProducts = () => {
-<<<<<<< HEAD
     dispatch(getProducts());
   };
 
-=======
     dispatch(getAllProducts());
   };
->>>>>>> front-end
   return (
     <>
       <Container class1="home-wrapper-1 py-5">
@@ -275,8 +272,6 @@ const Home = () => {
         </div>
       </Container>
 
-<<<<<<< HEAD
-=======
       <Container class1="special-wrapper py-5 home-wrapper-2">
         <div className="row">
           <div className="col-12">
@@ -303,7 +298,7 @@ const Home = () => {
         </div>
       </Container>
 
->>>>>>> front-end
+
       <Container class1="popular-wrapper py-5 home-wrapper-2">
         <div className="row">
           <div className="col-12">
