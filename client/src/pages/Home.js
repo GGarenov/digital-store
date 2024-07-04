@@ -27,9 +27,6 @@ const Home = () => {
   };
 
   const getProducts = () => {
-    dispatch(getProducts());
-  };
-
     dispatch(getAllProducts());
   };
   return (
@@ -297,7 +294,6 @@ const Home = () => {
             })}
         </div>
       </Container>
-
 
       <Container class1="popular-wrapper py-5 home-wrapper-2">
         <div className="row">
