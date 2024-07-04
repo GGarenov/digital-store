@@ -4,10 +4,13 @@ import Marquee from "react-fast-marquee";
 import BlogCard from "../components/BlogCard";
 import ProductCard from "../components/ProductCard";
 import Container from "../components/Container";
+import SpecialProduct from "../components/SpecialProduct";
 import { services } from "../utils/Data";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllBlogs } from "../features/blogs/blogSlice";
+import { getAllProducts } from "../features/products/productSlice";
+
 const Home = () => {
   const blogState = useSelector((state) => state.blog.blog);
   const productState = useSelector((state) => state.product.product);
@@ -16,6 +19,7 @@ const Home = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     getBlogs();
+    getProducts();
   }, []);
 
   const getBlogs = () => {
@@ -23,9 +27,14 @@ const Home = () => {
   };
 
   const getProducts = () => {
+<<<<<<< HEAD
     dispatch(getProducts());
   };
 
+=======
+    dispatch(getAllProducts());
+  };
+>>>>>>> front-end
   return (
     <>
       <Container class1="home-wrapper-1 py-5">
@@ -266,6 +275,35 @@ const Home = () => {
         </div>
       </Container>
 
+<<<<<<< HEAD
+=======
+      <Container class1="special-wrapper py-5 home-wrapper-2">
+        <div className="row">
+          <div className="col-12">
+            <h3 className="section-heading">Special Products</h3>
+          </div>
+        </div>
+        <div className="row">
+          {productState &&
+            productState.map((item, index) => {
+              if (item.tags === "special") {
+                return (
+                  <SpecialProduct
+                    key={index}
+                    brand={item.brand}
+                    title={item.title}
+                    totalrating={item.totalrating.toString()}
+                    price={item?.price}
+                    sold={item?.sold}
+                    quantity={item?.quantity}
+                  />
+                );
+              }
+            })}
+        </div>
+      </Container>
+
+>>>>>>> front-end
       <Container class1="popular-wrapper py-5 home-wrapper-2">
         <div className="row">
           <div className="col-12">
