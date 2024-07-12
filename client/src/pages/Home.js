@@ -212,10 +212,75 @@ const Home = () => {
           <div className="col-12">
             <h3 className="section-heading">Featured Collections</h3>
           </div>
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
+          {productState &&
+            productState.map((item, index) => {
+              if (item.tags === "featured") {
+                return (
+                  <div key={index} className={"col-3"}>
+                    <div className="product-card position-relative">
+                      <div className="wishlist-icon position-absolute">
+                        <button className="border-0 bg-transperant">
+                          <img
+                            onClick={() => {
+                              addToWish(item?._id);
+                            }}
+                            src={wish}
+                            alt="wishlist"
+                          />
+                        </button>
+                      </div>
+                      <Link
+                      // to={`${
+                      //   location.pathname === "/"
+                      //     ? "product/" + item.slug
+                      //     : location.pathname === "/product/:id"
+                      //     ? "/product/" + item.slug
+                      //     : item.slug
+                      // }`}
+                      >
+                        <div className="product-image">
+                          <img
+                            src={item.images[0].url}
+                            className="img-fluid"
+                            alt="product"
+                          />
+                          <img
+                            src={watch2}
+                            className="img-fluid"
+                            alt="product"
+                          />
+                        </div>
+                        <div className="product-details">
+                          <h6 className="brand">{item.brand}</h6>
+                          <h5 className="product-title">{item.title}</h5>
+                          <ReactStars
+                            count={5}
+                            size={24}
+                            value={Number(item.totalrating)}
+                            edit={false}
+                            activeColor="#ffd700"
+                          />
+                          ,<p className="price">${item.price}</p>
+                        </div>
+                      </Link>
+                      <div className="action-bar position-absolute">
+                        <div className="d-flex flex-column gap-15">
+                          <button className="border-0 bg-transperant">
+                            <img src={addcart} alt="cart" />
+                          </button>
+                          <button className="border-0 bg-transperant">
+                            <img src={productcompare} alt="compare" />
+                          </button>
+                          <button className="border-0 bg-transperant">
+                            <img src={view} alt="view" />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
+            })}
         </div>
       </Container>
 
@@ -317,12 +382,7 @@ const Home = () => {
             productState.map((item, index) => {
               if (item.tags === "popular") {
                 return (
-                  <div
-                    key={index}
-                    className={`${
-                      location.pathname === "/store" ? `gr-${grid}` : "col-3"
-                    }`}
-                  >
+                  <div key={index} className={"col-3"}>
                     <div className="product-card position-relative">
                       <div className="wishlist-icon position-absolute">
                         <button className="border-0 bg-transperant">
@@ -336,13 +396,13 @@ const Home = () => {
                         </button>
                       </div>
                       <Link
-                        to={`${
-                          location.pathname === "/"
-                            ? "product/" + item.slug
-                            : location.pathname === "/product/:id"
-                            ? "/product/" + item.slug
-                            : item.slug
-                        }`}
+                      // to={`${
+                      //   location.pathname === "/"
+                      //     ? "product/" + item.slug
+                      //     : location.pathname === "/product/:id"
+                      //     ? "/product/" + item.slug
+                      //     : item.slug
+                      // }`}
                       >
                         <div className="product-image">
                           <img

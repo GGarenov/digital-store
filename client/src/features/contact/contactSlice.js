@@ -45,7 +45,7 @@ export const contactSlice = createSlice({
         state.isSuccess = false;
         state.message = action.error.message;
         if (state.isError === true) {
-          toast.success("Something is wrong! Please try again.");
+          toast.error("Something is wrong! Please try again.");
         }
       });
   },
