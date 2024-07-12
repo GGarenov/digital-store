@@ -302,10 +302,12 @@ const Home = () => {
           </div>
         </div>
         <div className="row">
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
+          {productState &&
+            productState.map((item, index) => {
+              if (item.tags === "popular") {
+                return <ProductCard key={index} data={productState} />;
+              }
+            })}
         </div>
       </Container>
 
