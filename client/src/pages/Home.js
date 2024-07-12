@@ -39,6 +39,7 @@ const Home = () => {
   const addToWish = (id) => {
     dispatch(addToWishlist(id));
   };
+
   return (
     <>
       <Container class1="home-wrapper-1 py-5">
