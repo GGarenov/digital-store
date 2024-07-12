@@ -7,6 +7,9 @@ import { BiInfoCircle } from "react-icons/bi";
 import Container from "../components/Container";
 import * as yup from "yup";
 import { useFormik } from "formik";
+import { useDispatch } from "react-redux";
+import { createQuery } from "../features/contact/contactSlice";
+
 const contactSchema = yup.object({
   name: yup.string().required("Name is required"),
   email: yup
@@ -19,6 +22,7 @@ const contactSchema = yup.object({
 });
 
 const Contact = () => {
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -28,7 +32,7 @@ const Contact = () => {
     },
     validationSchema: contactSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      dispatch(createQuery(values));
     },
   });
   return (

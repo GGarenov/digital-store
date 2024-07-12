@@ -35,6 +35,9 @@ export const contactSlice = createSlice({
         state.isError = false;
         state.isSuccess = true;
         state.contact = action.payload;
+        if (state.isSuccess === true) {
+          toast.success("Contact form submitted successfully!");
+        }
       })
       .addCase(createQuery.rejected, (state, action) => {
         state.isError = true;
@@ -42,7 +45,7 @@ export const contactSlice = createSlice({
         state.isSuccess = false;
         state.message = action.error.message;
         if (state.isError === true) {
-          toast.error(action.error);
+          toast.success("Something is wrong! Please try again.");
         }
       });
   },
