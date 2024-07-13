@@ -442,7 +442,11 @@ const Home = () => {
                             <img src={productcompare} alt="compare" />
                           </button>
                           <button className="border-0 bg-transperant">
-                            <img src={view} alt="view" />
+                            <img
+                              onClick={() => navigate("/product/" + item?._id)}
+                              src={view}
+                              alt="view"
+                            />
                           </button>
                         </div>
                       </div>
