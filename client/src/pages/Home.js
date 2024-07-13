@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllBlogs } from "../features/blogs/blogSlice";
 import { getAllProducts } from "../features/products/productSlice";
 import ReactStars from "react-rating-stars-component";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import productcompare from "../images/prodcompare.svg";
 import wish from "../images/wish.svg";
 import watch2 from "../images/watch-2.avif";
@@ -21,7 +21,7 @@ import { addToWishlist } from "../features/products/productSlice";
 const Home = () => {
   const blogState = useSelector((state) => state.blog.blog);
   const productState = useSelector((state) => state.product.product);
-  console.log(productState);
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -272,7 +272,11 @@ const Home = () => {
                             <img src={productcompare} alt="compare" />
                           </button>
                           <button className="border-0 bg-transperant">
-                            <img src={view} alt="view" />
+                            <img
+                              onClick={() => navigate("/product/" + item._id)}
+                              src={view}
+                              alt="view"
+                            />
                           </button>
                         </div>
                       </div>
