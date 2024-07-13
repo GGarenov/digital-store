@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import BreadCrumb from "../components/BreadCrumb";
 import Meta from "../components/Meta";
 import ProductCard from "../components/ProductCard";
@@ -13,6 +13,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAProduct } from "../features/products/productSlice";
 
 const SingleProduct = () => {
+  const [color, setColor] = useState(null);
+  const [quantity, setQuantity] = useState(1);
   const location = useLocation();
   const getProductId = location.pathname.split("/")[2];
   const dispatch = useDispatch();
@@ -21,6 +23,10 @@ const SingleProduct = () => {
   useEffect(() => {
     dispatch(getAProduct(getProductId));
   }, []);
+
+  const uploadCart = () => {
+    alert("Added to cart");
+  };
 
   const props = {
     width: 600,
@@ -130,10 +136,20 @@ const SingleProduct = () => {
                       max={10}
                       className="form-control"
                       style={{ width: "50px" }}
+                      id=""
+                      onChange={(e) => setQuantity(e.target.value)}
+                      value={quantity}
                     ></input>
                   </div>
                   <div className="d-flex align-items-center gap-30 ms-5">
-                    <button className="button border-0">Add to Cart</button>
+                    <button
+                      className="button border-0"
+                      onClick={() => {
+                        uploadCart(productState?._id);
+                      }}
+                    >
+                      Add to Cart
+                    </button>
                     <button className="button signup">Buy it now</button>
                   </div>
                 </div>
