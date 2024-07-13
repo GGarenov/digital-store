@@ -11,6 +11,8 @@ import Container from "../components/Container";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getAProduct } from "../features/products/productSlice";
+import { toast } from "react-toastify";
+import { addProductToCart } from "../features/user/userSlice";
 
 const SingleProduct = () => {
   const [color, setColor] = useState(null);
@@ -25,7 +27,19 @@ const SingleProduct = () => {
   }, []);
 
   const uploadCart = () => {
-    alert("Added to cart");
+    if (color === null) {
+      toast.error("Please select a color");
+      return false;
+    } else {
+      dispatch(
+        addProductToCart({
+          productId: productState?._id,
+          quantity,
+          color,
+          price: productState?.price,
+        })
+      );
+    }
   };
 
   const props = {
@@ -124,7 +138,7 @@ const SingleProduct = () => {
                 </div>
                 <div className="d-flex gap-10 flex-column mt-2 mb-3">
                   <h3 className="product-heading">Color :</h3>
-                  <Color />
+                  <Color setColor={setColor} colorData={productState?.color} />
                 </div>
                 <div className="d-flex align-items-center gap-15 flex-row mt-2 mb-3">
                   <h3 className="product-heading">Quantity :</h3>

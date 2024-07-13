@@ -41,11 +41,21 @@ export const getUserProductWishlist = createAsyncThunk(
 
 export const addProductToCart = createAsyncThunk(
   "user/cart/add",
-  async (cartData, thunkAPI) => {
+  async (cartData, { rejectWithValue }) => {
     try {
-      return await authService.addToCart(cartData);
+      const response = await authService.addToCart(cartData);
+      return response;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      if (error.response) {
+        const errorInfo = {
+          message: error.message,
+          statusCode: error.response.status,
+          data: error.response.data,
+        };
+        return rejectWithValue(errorInfo);
+      } else {
+        return rejectWithValue({ message: "An unexpected error occurred" });
+      }
     }
   }
 );
@@ -130,7 +140,10 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
-        state.cart = action.payload;
+        state.cartProduct = action.payload;
+        if (state.isSuccess) {
+          toast.success("Product Added to Cart!");
+        }
       })
       .addCase(addProductToCart.rejected, (state, action) => {
         state.isLoading = false;
