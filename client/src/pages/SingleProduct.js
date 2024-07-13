@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import BreadCrumb from "../components/BreadCrumb";
 import Meta from "../components/Meta";
 import ProductCard from "../components/ProductCard";
@@ -8,14 +8,28 @@ import Color from "../components/Color";
 import { TbGitCompare } from "react-icons/tb";
 import { AiOutlineHeart } from "react-icons/ai";
 import Container from "../components/Container";
+import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getAProduct } from "../features/products/productSlice";
 
 const SingleProduct = () => {
+  const location = useLocation();
+  const getProductId = location.pathname.split("/")[2];
+  const dispatch = useDispatch();
+  const productState = useSelector((state) => state.product.singleproduct);
+  console.log(productState);
+  useEffect(() => {
+    dispatch(getAProduct(getProductId));
+  }, []);
+
   const props = {
     width: 600,
     height: 500,
     zoomWidth: 100,
-    img: "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-    scale: 0.3,
+    img: productState?.images[0]?.url
+      ? productState?.images[0]?.url
+      : "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    scale: 0.5,
     zoomPosition: "right",
     offset: { vertical: 0, horizontal: 50 },
   };
@@ -34,45 +48,30 @@ const SingleProduct = () => {
               </div>
             </div>
             <div className="other-product-images d-flex flex-wrap gap-15">
-              <div>
-                <img
-                  src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                  className="img-fluid"
-                  alt="product"
-                />
-              </div>
-              <div>
-                <img
-                  src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                  className="img-fluid"
-                  alt="product"
-                />
-              </div>
-              <div>
-                <img
-                  src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                  className="img-fluid"
-                  alt="product"
-                />
-              </div>
-              <div>
-                <img
-                  src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                  className="img-fluid"
-                  alt="product"
-                />
-              </div>
+              {productState?.images.map((item, index) => {
+                return (
+                  <div>
+                    <img src={item?.url} className="img-fluid" alt="product" />
+                  </div>
+                );
+              })}
             </div>
           </div>
           <div className="col-6">
             <div className="main-product-details">
               <div className="border-bottom">
-                <h3 className="title">Kids Headphones Bulk 10 Pack Multi Colored For Students</h3>
+                <h3 className="title">{productState?.title}</h3>
               </div>
               <div className="border-bottom py-3">
-                <p className="price">$100</p>
+                <p className="price">${productState?.price}</p>
                 <div className="d-flex align-items-center gap-10">
-                  <ReactStars count={5} size={24} value={4} edit={false} activeColor="#ffd700" />
+                  <ReactStars
+                    count={5}
+                    size={24}
+                    value={productState?.totalrating}
+                    edit={false}
+                    activeColor="#ffd700"
+                  />
                   <p className="mb-0 t-review">(2 Reviews)</p>
                 </div>
                 <a className="review-button" href="#review">
@@ -81,27 +80,40 @@ const SingleProduct = () => {
               </div>
               <div className="py-3">
                 <div className="d-flex gap-10 align-items-center">
-                  <h3 className="product-heading">Type :</h3> <p className="product-data">Watch</p>
+                  <h3 className="product-heading">Type :</h3>{" "}
+                  <p className="product-data">Watch</p>
                 </div>
                 <div className="d-flex gap-10 align-items-center">
-                  <h3 className="product-heading">Brand :</h3> <p className="product-data">Havells</p>
+                  <h3 className="product-heading">Brand :</h3>{" "}
+                  <p className="product-data">{productState?.brand}</p>
                 </div>
                 <div className="d-flex gap-10 align-items-center">
-                  <h3 className="product-heading">Category :</h3> <p className="product-data">Watch</p>
+                  <h3 className="product-heading">Category :</h3>{" "}
+                  <p className="product-data">{productState?.category}</p>
                 </div>
                 <div className="d-flex gap-10 align-items-center">
-                  <h3 className="product-heading">Tags :</h3> <p className="product-data">Watch</p>
+                  <h3 className="product-heading">Tags :</h3>{" "}
+                  <p className="product-data">{productState?.tags}</p>
                 </div>
                 <div className="d-flex gap-10 align-items-center">
-                  <h3 className="product-heading">Available :</h3> <p className="product-data">In stock</p>
+                  <h3 className="product-heading">Available :</h3>{" "}
+                  <p className="product-data">In stock</p>
                 </div>
                 <div className="d-flex gap-10 flex-column mt-2 mb-3">
                   <h3 className="product-heading">Size :</h3>
                   <div className="d-flex flex-wrap gap-15">
-                    <span className="badge border border-1 bg-white text-dark border-secondary">S</span>
-                    <span className="badge border border-1 bg-white text-dark border-secondary">M</span>
-                    <span className="badge border border-1 bg-white text-dark border-secondary">L</span>
-                    <span className="badge border border-1 bg-white text-dark border-secondary">XL</span>
+                    <span className="badge border border-1 bg-white text-dark border-secondary">
+                      S
+                    </span>
+                    <span className="badge border border-1 bg-white text-dark border-secondary">
+                      M
+                    </span>
+                    <span className="badge border border-1 bg-white text-dark border-secondary">
+                      L
+                    </span>
+                    <span className="badge border border-1 bg-white text-dark border-secondary">
+                      XL
+                    </span>
                   </div>
                 </div>
                 <div className="d-flex gap-10 flex-column mt-2 mb-3">
@@ -142,7 +154,8 @@ const SingleProduct = () => {
                 <div className="d-flex gap-10 flex-column my-3">
                   <h3 className="product-heading">Shipping & Returns :</h3>{" "}
                   <p className="product-data">
-                    Free shipping and returns available on all orders! <br /> We ship all over Bulgaria within
+                    Free shipping and returns available on all orders! <br /> We
+                    ship all over Bulgaria within
                     <b>3-5 days!</b>
                   </p>
                 </div>
@@ -156,10 +169,11 @@ const SingleProduct = () => {
           <div className="col-12">
             <h4>Description</h4>
             <div className="bg-white p-3">
-              <p>
-                Nekvo opisanie tuka description tova onova da e malko po-dulgo de da subere nqkvo mqsto znam li gledam
-                tuka 3-4 reda napraveni podrobno opisanie na produkta ma realno 2-3 izrecheniq da ima tam za fon bratle.
-              </p>
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: productState?.description,
+                }}
+              ></p>
             </div>
           </div>
         </div>
@@ -173,14 +187,23 @@ const SingleProduct = () => {
                 <div>
                   <h4 className="mb-2">Customer reviews</h4>
                   <div className="d-flex gap-10 align-items-center">
-                    <ReactStars count={5} size={24} value={4} edit={false} activeColor="#ffd700" />
+                    <ReactStars
+                      count={5}
+                      size={24}
+                      value={4}
+                      edit={false}
+                      activeColor="#ffd700"
+                    />
                     <p className="mb-0">Based on 2 reviews</p>
                   </div>
                 </div>
                 <div>
                   {orderedProduct && (
                     <div>
-                      <a className="text-dark text-decoration-underline" href="/">
+                      <a
+                        className="text-dark text-decoration-underline"
+                        href="/"
+                      >
                         Write a review
                       </a>
                     </div>
@@ -190,14 +213,28 @@ const SingleProduct = () => {
               <div className="review-form py-4">
                 <h4 id="review">Write a review</h4>
                 <div>
-                  <ReactStars count={5} size={24} value={4} edit={true} activeColor="#ffd700" />
+                  <ReactStars
+                    count={5}
+                    size={24}
+                    value={4}
+                    edit={true}
+                    activeColor="#ffd700"
+                  />
                 </div>
                 <form action="" className="d-flex flex-column gap-15">
                   <div>
-                    <input type="text" className="form-control" placeholder="name" />
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="name"
+                    />
                   </div>
                   <div>
-                    <input type="email" className="form-control" placeholder="email" />
+                    <input
+                      type="email"
+                      className="form-control"
+                      placeholder="email"
+                    />
                   </div>
 
                   <div>
@@ -221,9 +258,18 @@ const SingleProduct = () => {
                 <div className="review">
                   <div className="d-flex gap-10 align-items-center">
                     <h6 className="mb-0">Navdeep</h6>
-                    <ReactStars count={5} size={24} value={4} edit={false} activeColor="#ffd700" />
+                    <ReactStars
+                      count={5}
+                      size={24}
+                      value={4}
+                      edit={false}
+                      activeColor="#ffd700"
+                    />
                   </div>
-                  <p className="mt-3">Nekuv dulag text dulag mnogo kolko da e dulag bratle kolkoto moje</p>
+                  <p className="mt-3">
+                    Nekuv dulag text dulag mnogo kolko da e dulag bratle kolkoto
+                    moje
+                  </p>
                 </div>
               </div>
             </div>
