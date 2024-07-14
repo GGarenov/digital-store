@@ -361,6 +361,21 @@ const getUserCart = asyncHandler(async (req, res) => {
   }
 });
 
+const removeProductFromCart = asyncHandler(async (req, res) => {
+  const { _id } = req.user;
+  const { cartItemId } = req.body;
+  validateMongodbId(_id);
+  try {
+    const deleteProductFromCart = await Cart.deleteOne({
+      userId: _id,
+      _id: cartItemId,
+    });
+    res.json(deleteProductFromCart);
+  } catch (error) {
+    throw new Error(error);
+  }
+});
+
 //Empty Cart
 const emptyCart = asyncHandler(async (req, res) => {
   const { _id } = req.user;
@@ -521,4 +536,5 @@ module.exports = {
   getOrders,
   updateOrderStatus,
   getAllOrders,
+  removeProductFromCart,
 };

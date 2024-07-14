@@ -71,6 +71,28 @@ export const getUserCart = createAsyncThunk(
   }
 );
 
+export const deleteCartProduct = createAsyncThunk(
+  "user/cart/product/delete",
+  async (id, thunkAPI) => {
+    try {
+      return await authService.removeProductFromCart(id);
+    } catch (error) {
+      if (error.response) {
+        const errorInfo = {
+          message: error.message,
+          statusCode: error.response.status,
+          data: error.response.data,
+        };
+        return thunkAPI.rejectWithValue(errorInfo);
+      } else {
+        return thunkAPI.rejectWithValue({
+          message: "An unexpected error occurred",
+        });
+      }
+    }
+  }
+);
+
 const initialState = {
   user: getCustomerfromLocalStorage,
   isError: false,
@@ -176,6 +198,27 @@ export const authSlice = createSlice({
         state.isError = true;
         state.isSuccess = false;
         state.message = action.error.message;
+      })
+      .addCase(deleteCartProduct.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteCartProduct.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.deletedCartProduct = action.payload;
+        if (state.isSuccess) {
+          toast.success("Product removed from cart!");
+        }
+      })
+      .addCase(deleteCartProduct.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error.message;
+        if (state.isSuccess === false) {
+          toast.error("Something Went Wrong!");
+        }
       });
   },
 });

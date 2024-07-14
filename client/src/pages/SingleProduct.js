@@ -29,13 +29,13 @@ const SingleProduct = () => {
     dispatch(getAProduct(getProductId));
     dispatch(getUserCart());
   }, []);
-  useEffect(() => {
-    for (let index = 0; index < cartState.length; index++) {
-      if (getProductId === cartState[index]?.productId?._id) {
-        setAlreadyAdded(true);
-      }
-    }
-  }, []);
+  // useEffect(() => {
+  //   for (let index = 0; index < cartState.length; index++) {
+  //     if (getProductId === cartState[index]?.productId?._id) {
+  //       setAlreadyAdded(true);
+  //     }
+  //   }
+  // }, []);
 
   const uploadCart = () => {
     if (color === null) {
