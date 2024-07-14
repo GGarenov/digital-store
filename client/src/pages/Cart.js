@@ -18,6 +18,9 @@ const Cart = () => {
 
   const deleteACartProduct = (id) => {
     dispatch(deleteCartProduct(id));
+    setTimeout(() => {
+      dispatch(getUserCart());
+    }, 200);
   };
 
   return (
