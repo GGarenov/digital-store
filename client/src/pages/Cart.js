@@ -80,15 +80,7 @@ const Cart = () => {
                 Continue to shopping
               </Link>
               <div className="d-flex flex-column align-items-end">
-                <h4>
-                  Subtotal: $
-                  {userCartState
-                    .reduce(
-                      (total, item) => total + item.price * item.quantity,
-                      0
-                    )
-                    .toFixed(2)}
-                </h4>
+                <h4>Subtotal: $1000</h4>
                 <p>Taxes and shipping calucated at the checkout</p>
                 <Link to="/checkout" className="button">
                   Checkout
