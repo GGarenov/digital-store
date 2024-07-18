@@ -376,6 +376,41 @@ const removeProductFromCart = asyncHandler(async (req, res) => {
   }
 });
 
+const updateProductQuantityFromCart = asyncHandler(async (req, res) => {
+  console.log("Entering updateProductQuantityFromCart function");
+  const { _id } = req.user;
+  const { cartItemId, newQuantity } = req.params;
+  validateMongodbId(_id);
+  const quantity = parseInt(newQuantity, 10);
+
+  console.log("Update request received:");
+  console.log("Cart Item ID:", cartItemId);
+  console.log("New Quantity:", quantity);
+  console.log("User ID:", _id);
+
+  try {
+    // Find the cart item to update
+    const cartItem = await Cart.findOne({
+      _id: cartItemId,
+      userId: _id,
+    });
+
+    if (cartItem) {
+      // Update the quantity
+      cartItem.quantity = quantity;
+      await cartItem.save();
+
+      res.status(200).json({ success: true, cartItem });
+    } else {
+      console.log("Cart item not found");
+      res.status(404).json({ success: false, message: "Cart item not found" });
+    }
+  } catch (error) {
+    console.error("Error updating cart item:", error);
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
 //Empty Cart
 const emptyCart = asyncHandler(async (req, res) => {
   const { _id } = req.user;
@@ -537,4 +572,5 @@ module.exports = {
   updateOrderStatus,
   getAllOrders,
   removeProductFromCart,
+  updateProductQuantityFromCart,
 };

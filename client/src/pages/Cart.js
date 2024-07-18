@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import BreadCrumb from "../components/BreadCrumb";
 import Meta from "../components/Meta";
 import watch from "../images/watch.jpg";
@@ -6,15 +6,34 @@ import { AiFillDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import Container from "../components/Container";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteCartProduct, getUserCart } from "../features/user/userSlice";
+import {
+  deleteCartProduct,
+  getUserCart,
+  updaateCartProduct,
+} from "../features/user/userSlice";
 
 const Cart = () => {
   const dispatch = useDispatch();
+  const [productUpdateDetail, setProductUpdateDetail] = useState(null);
   const userCartState = useSelector((state) => state.auth.cartProducts);
 
   useEffect(() => {
     dispatch(getUserCart());
-  }, []);
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (productUpdateDetail) {
+      dispatch(
+        updaateCartProduct({
+          cartItemId: productUpdateDetail?.cartItemId,
+          quantity: productUpdateDetail?.quantity,
+        })
+      );
+      setTimeout(() => {
+        dispatch(getUserCart());
+      }, 200);
+    }
+  }, [productUpdateDetail, dispatch]);
 
   const deleteACartProduct = (id) => {
     dispatch(deleteCartProduct(id));
@@ -22,6 +41,8 @@ const Cart = () => {
       dispatch(getUserCart());
     }, 200);
   };
+
+  const updateACartProduct = (productUpdateDetail) => {};
 
   return (
     <>
@@ -39,7 +60,10 @@ const Cart = () => {
             {userCartState &&
               userCartState?.map((item, index) => {
                 return (
-                  <div className="cart-data py-3 mb-2 d-flex justify-content-between align-items-center">
+                  <div
+                    className="cart-data py-3 mb-2 d-flex justify-content-between align-items-center"
+                    key={item?._id}
+                  >
                     <div className="cart-col-1 gap-15 d-flex align-items-center">
                       <div className="w-25">
                         <img src={watch} className="img-fluid" alt="product" />
@@ -68,7 +92,17 @@ const Cart = () => {
                           max={10}
                           name=""
                           id=""
-                          value={item?.quantity}
+                          value={
+                            productUpdateDetail?.cartItemId === item?._id
+                              ? productUpdateDetail.quantity
+                              : item?.quantity
+                          }
+                          onChange={(e) => {
+                            setProductUpdateDetail({
+                              cartItemId: item?._id,
+                              quantity: e.target.value,
+                            });
+                          }}
                         />
                       </div>
                       <div>

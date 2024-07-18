@@ -5,7 +5,7 @@ export const config = () => {
     ? JSON.parse(localStorage.getItem("customer"))
     : null;
 
-  console.log("Token from local storage:", customerData);
+  // console.log("Token from local storage:", customerData);
 
   return {
     headers: {

@@ -32,7 +32,7 @@ const addToCart = async (cartData) => {
   }
 };
 
-const getCart = async (cartData) => {
+const getCart = async () => {
   const response = await axios.get(`${base_url}user/cart`, config());
   if (response.data) {
     return response.data;
@@ -49,6 +49,17 @@ const removeProductFromCart = async (id) => {
   }
 };
 
+const updateProductFromCart = async (cartDetail) => {
+  const response = await axios.put(
+    `${base_url}user/update-product-cart/${cartDetail.cartItemId}/${cartDetail.quantity}`,
+    {},
+    config()
+  );
+  if (response.data) {
+    return response.data;
+  }
+};
+
 export const authService = {
   register,
   login,
@@ -56,4 +67,5 @@ export const authService = {
   addToCart,
   getCart,
   removeProductFromCart,
+  updateProductFromCart,
 };
