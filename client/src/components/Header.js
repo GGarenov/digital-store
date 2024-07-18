@@ -1,8 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
 
 function Header() {
+  const dispatch = useDispatch();
+  const cartState = useSelector((state) => state?.auth?.cartProducts);
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    let sum = 0;
+    if (cartState) {
+      for (let index = 0; index < cartState.length; index++) {
+        sum +=
+          Number(cartState[index].quantity) * Number(cartState[index].price);
+      }
+    }
+    setTotal(sum);
+  }, [cartState]); // Add cartState to dependency array
+
   return (
     <>
       <header className="header-top-strip py-3">
@@ -49,7 +65,10 @@ function Header() {
             <div className="col-5">
               <div className="header-upper-links d-flex align-items-center justify-content-between">
                 <div>
-                  <Link to="/compare-product" className="d-flex align-items-center gap-10 text-white">
+                  <Link
+                    to="/compare-product"
+                    className="d-flex align-items-center gap-10 text-white"
+                  >
                     <img src="images/compare.svg" alt="compare" />
                     <p className="mb-0">
                       Compare <br />
@@ -58,7 +77,10 @@ function Header() {
                   </Link>
                 </div>
                 <div>
-                  <Link to="/wishlist" className="d-flex align-items-center gap-10 text-white">
+                  <Link
+                    to="/wishlist"
+                    className="d-flex align-items-center gap-10 text-white"
+                  >
                     <img src="images/wishlist.svg" alt="wishlist" />
                     <p className="mb-0">
                       Favourite <br />
@@ -67,7 +89,10 @@ function Header() {
                   </Link>
                 </div>
                 <div>
-                  <Link to="/login" className="d-flex align-items-center gap-10 text-white">
+                  <Link
+                    to="/login"
+                    className="d-flex align-items-center gap-10 text-white"
+                  >
                     <img src="images/user.svg" alt="user" />
                     <p className="mb-0">
                       Log in <br />
@@ -76,11 +101,16 @@ function Header() {
                   </Link>
                 </div>
                 <div>
-                  <Link to="/cart" className="d-flex align-items-center gap-10 text-white">
+                  <Link
+                    to="/cart"
+                    className="d-flex align-items-center gap-10 text-white"
+                  >
                     <img src="images/cart.svg" alt="cart" />
                     <div className="d-flex flex-column gap-10">
-                      <span className="badge bg-white text-dark">0</span>
-                      <p className="mb-0">$ 500</p>
+                      <span className="badge bg-white text-dark">
+                        {cartState ? cartState.length : 0}
+                      </span>
+                      <p className="mb-0">$ {total ? total : 0}</p>
                     </div>
                   </Link>
                 </div>
@@ -102,7 +132,8 @@ function Header() {
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                     >
-                      <img src="images/menu.svg" alt="menu" /> <span className="me-5 d-inline-block">Categories</span>
+                      <img src="images/menu.svg" alt="menu" />{" "}
+                      <span className="me-5 d-inline-block">Categories</span>
                     </button>
                     <ul className="dropdown-menu">
                       <li>
