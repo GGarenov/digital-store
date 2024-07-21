@@ -24,8 +24,8 @@ import Checkout from "./pages/Checkout";
 import CheckoutForm from "./pages/CheckoutForm";
 import Completion from "./pages/Completion";
 import CheckoutPayment from "./components/CheckoutPayment";
-import { PrivateRoutes } from "./routing/PrivateRoutes";
-import { OpenRoutes } from "./routing/OpenRoutes";
+import PrivateRoutes from "./routing/PrivateRoutes";
+import OpenRoutes from "./routing/OpenRoutes";
 
 function App() {
   return (
