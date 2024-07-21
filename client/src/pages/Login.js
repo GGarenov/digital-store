@@ -31,9 +31,7 @@ function Login() {
     onSubmit: (values) => {
       dispatch(loginUser(values));
       setTimeout(() => {
-        if (authState.isSuccess) {
-          navigate("/");
-        }
+        navigate("/");
       });
     },
   });

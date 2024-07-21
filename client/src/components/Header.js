@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 function Header() {
   const dispatch = useDispatch();
   const cartState = useSelector((state) => state?.auth?.cartProducts);
+  const authState = useSelector((state) => state.auth);
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
@@ -17,7 +18,7 @@ function Header() {
       }
     }
     setTotal(sum);
-  }, [cartState]); // Add cartState to dependency array
+  }, [cartState]);
 
   return (
     <>
@@ -90,14 +91,20 @@ function Header() {
                 </div>
                 <div>
                   <Link
-                    to="/login"
+                    to={authState?.user === null ? "/login" : "/my-account"}
                     className="d-flex align-items-center gap-10 text-white"
                   >
                     <img src="images/user.svg" alt="user" />
-                    <p className="mb-0">
-                      Log in <br />
-                      My account
-                    </p>
+                    {authState?.user === null ? (
+                      <p className="mb-0">
+                        Log in <br />
+                        My account
+                      </p>
+                    ) : (
+                      <p className="mb-0">
+                        Welcome {authState?.user?.firstName} <br />
+                      </p>
+                    )}
                   </Link>
                 </div>
                 <div>

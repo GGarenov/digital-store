@@ -24,6 +24,8 @@ import Checkout from "./pages/Checkout";
 import CheckoutForm from "./pages/CheckoutForm";
 import Completion from "./pages/Completion";
 import CheckoutPayment from "./components/CheckoutPayment";
+import { PrivateRoutes } from "./routing/PrivateRoutes";
+import { OpenRoutes } from "./routing/OpenRoutes";
 
 function App() {
   return (
@@ -38,13 +40,41 @@ function App() {
             <Route path="product/:id" element={<SingleProduct />} />
             <Route path="blog" element={<Blog />} />
             <Route path="blog/:id" element={<SingleBlog />} />
-            <Route path="cart" element={<Cart />} />
+            <Route
+              path="cart"
+              element={
+                <PrivateRoutes>
+                  <Cart />
+                </PrivateRoutes>
+              }
+            />
             <Route path="checkout" element={<Checkout />} />
             <Route path="Compare-product" element={<CompareProduct />} />
-            <Route path="wishlist" element={<Wishlist />} />
-            <Route path="login" element={<Login />} />
+            <Route
+              path="wishlist"
+              element={
+                <PrivateRoutes>
+                  <Wishlist />
+                </PrivateRoutes>
+              }
+            />
+            <Route
+              path="login"
+              element={
+                <OpenRoutes>
+                  <Login />
+                </OpenRoutes>
+              }
+            />
             <Route path="forgot-password" element={<ForgotPassword />} />
-            <Route path="signup" element={<SignUp />} />
+            <Route
+              path="signup"
+              element={
+                <OpenRoutes>
+                  <SignUp />
+                </OpenRoutes>
+              }
+            />
             <Route path="reset-password" element={<ResetPassword />} />
             <Route path="privacy" element={<PrivacyPolicy />} />
             <Route path="refund" element={<RefundPolicy />} />
@@ -53,7 +83,14 @@ function App() {
             <Route path="checkoutform" element={<CheckoutForm />} />
             <Route path="completion" element={<Completion />} />
           </Route>
-          <Route path="checkout/payment" element={<CheckoutPayment />} />
+          <Route
+            path="checkout/payment"
+            element={
+              <PrivateRoutes>
+                <CheckoutPayment />
+              </PrivateRoutes>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </>
