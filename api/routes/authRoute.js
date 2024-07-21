@@ -43,7 +43,7 @@ router.put("/update-password", authMiddleware, updatePassword);
 router.post("/login", loginUser);
 router.post("/admin-login", loginAdmin);
 router.post("/cart", authMiddleware, userCart);
-router.post("/order/checkout", authMiddleware, checkout);
+router.post("/order/create-checkout-session", authMiddleware, checkout);
 router.post("/order/paymentVerification", authMiddleware, paymentVerification);
 // router.post("/cart/apply-coupon", authMiddleware, applyCoupon);
 router.post("/cart/create-order", authMiddleware, createOrder);

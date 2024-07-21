@@ -5,6 +5,7 @@ import Container from "../components/Container";
 import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { loadStripe } from "@stripe/stripe-js";
 
 const shippingSchema = yup.object({
   firstName: yup.string().required("First Name is required"),
@@ -15,6 +16,10 @@ const shippingSchema = yup.object({
   city: yup.string().required("City is required"),
   pincode: yup.number().required("Pincode is required"),
 });
+
+const stripePromise = loadStripe(
+  "pk_test_51OKfIkEBnEVh022tkzfZ8BSiDZNoeBLPVRwqcDA7XCQMVyTFzQdBwmfMEfu7pTniIkX88J5ncTjlOBA16p7ho4kj00W75M5ZOQ"
+);
 
 const Checkout = () => {
   const dispatch = useDispatch();
@@ -46,8 +51,50 @@ const Checkout = () => {
     validationSchema: shippingSchema,
     onSubmit: (values) => {
       setShippingInfo(values);
+      checkoutHandler();
     },
   });
+
+  const checkoutHandler = async () => {
+    const stripe = await stripePromise;
+    if (!stripe) {
+      console.log("Stripe didn't load");
+      return;
+    }
+
+    // Call your backend to create a PaymentIntent and get the client secret
+    const response = await fetch("/order/create-payment-intent", {
+      method: "POST",
+    });
+    const { clientSecret } = await response.json();
+
+    // Assuming you have a form with an element with an ID of 'card-element' where Stripe Elements injects the card input field
+    const elements = stripe.elements();
+    const cardElement = elements.create("card");
+    cardElement.mount("#card-element");
+
+    // Confirm the payment
+    const result = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: cardElement, // Use the card Element for payment method details
+        billing_details: {
+          // Optionally, include billing details
+          name: "Jenny Rosen",
+        },
+      },
+    });
+
+    if (result.error) {
+      // Show error to your customer (e.g., insufficient funds)
+      console.log(result.error.message);
+    } else {
+      // The payment has been processed!
+      if (result.paymentIntent.status === "succeeded") {
+        console.log("Payment succeeded");
+        // Handle post-payment logic here (e.g., update database, redirect to a success page)
+      }
+    }
+  };
 
   return (
     <>
