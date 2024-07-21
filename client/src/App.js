@@ -21,6 +21,9 @@ import TermsAndConditions from "./pages/TermsAndConditions";
 import SingleProduct from "./pages/SingleProduct";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
+import CheckoutForm from "./pages/CheckoutForm";
+import Completion from "./pages/Completion";
+import CheckoutPayment from "./components/CheckoutPayment";
 
 function App() {
   return (
@@ -47,7 +50,10 @@ function App() {
             <Route path="refund" element={<RefundPolicy />} />
             <Route path="shipping" element={<ShippingPolicy />} />
             <Route path="terms" element={<TermsAndConditions />} />
+            <Route path="checkoutform" element={<CheckoutForm />} />
+            <Route path="completion" element={<Completion />} />
           </Route>
+          <Route path="checkout/payment" element={<CheckoutPayment />} />
         </Routes>
       </BrowserRouter>
     </>
