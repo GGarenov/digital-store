@@ -2,7 +2,7 @@ import { PaymentElement } from "@stripe/react-stripe-js";
 import { useState } from "react";
 import { useStripe, useElements } from "@stripe/react-stripe-js";
 
-export default function CheckoutForm() {
+export default function CheckoutForm({ handleCheckout }) {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -20,21 +20,29 @@ export default function CheckoutForm() {
 
     setIsProcessing(true);
 
-    const { error } = await stripe.confirmPayment({
+    const { error, paymentIntent } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        // Make sure to change this to your payment completion page
         return_url: `${window.location.origin}/completion`,
       },
     });
 
-    if (error.type === "card_error" || error.type === "validation_error") {
-      setMessage(error.message);
+    if (error) {
+      if (error.type === "card_error" || error.type === "validation_error") {
+        setMessage(error.message);
+      } else {
+        setMessage("An unexpected error occurred.");
+      }
+      setIsProcessing(false);
     } else {
-      setMessage("An unexpected error occured.");
+      // Payment was successful
+      if (paymentIntent && paymentIntent.status === "succeeded") {
+        handleCheckout({
+          stripeSessionId: paymentIntent.id,
+          stripePaymentIntentId: paymentIntent.client_secret,
+        });
+      }
     }
-
-    setIsProcessing(false);
   };
 
   return (
@@ -46,10 +54,9 @@ export default function CheckoutForm() {
         id="submit"
       >
         <span id="button-text">
-          {isProcessing ? "Processing ... " : "Pay now"}
+          {isProcessing ? "Processing..." : "Pay now"}
         </span>
       </button>
-      {/* Show any error or success messages */}
       {message && <div id="payment-message">{message}</div>}
     </form>
   );
