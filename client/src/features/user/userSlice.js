@@ -107,6 +107,26 @@ export const updaateCartProduct = createAsyncThunk(
   }
 );
 
+export const createOrder = createAsyncThunk(
+  "user/order/create",
+  async (orderData, { rejectWithValue }) => {
+    try {
+      return await authService.createOrder(orderData);
+    } catch (error) {
+      if (error.response) {
+        const errorInfo = {
+          message: error.message,
+          statusCode: error.response.status,
+          data: error.response.data,
+        };
+        return rejectWithValue(errorInfo);
+      } else {
+        return rejectWithValue({ message: "An unexpected error occurred" });
+      }
+    }
+  }
+);
+
 const initialState = {
   user: getCustomerfromLocalStorage,
   isError: false,
@@ -254,6 +274,23 @@ export const authSlice = createSlice({
         if (state.isSuccess === false) {
           toast.error("Something Went Wrong!");
         }
+      })
+      .addCase(createOrder.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(createOrder.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.order = action.payload;
+        toast.success("Order created successfully!");
+      })
+      .addCase(createOrder.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error.message;
+        toast.error("Failed to create order!");
       });
   },
 });
