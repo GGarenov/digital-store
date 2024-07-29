@@ -420,6 +420,7 @@ const createOrder = asyncHandler(async (req, res) => {
     paymentInfo,
   } = req.body;
   const { _id } = req.user;
+
   try {
     const order = await Order.create({
       shippingInfo,
@@ -429,19 +430,29 @@ const createOrder = asyncHandler(async (req, res) => {
       paymentInfo,
       user: _id,
     });
-    res.json(order);
+
+    console.log("Order created:", order); // Log the created order
+
+    res.status(201).json(order); // Send the created order back in the response
   } catch (error) {
-    throw new Error(error);
+    console.error("Error creating order:", error); // Log any errors
+    res
+      .status(500)
+      .json({ message: "Error creating order", error: error.message });
   }
 });
 
 const getMyOrders = asyncHandler(async (req, res) => {
   const { _id } = req.user;
 
+  console.log("User ID:", _id); // Log the user ID
+
   try {
     const orders = await Order.find({ user: _id });
+    console.log("Orders found:", orders); // Log the orders found
     res.json({ orders });
   } catch (error) {
+    console.error("Error fetching orders:", error); // Log any errors
     throw new Error(error);
   }
 });
