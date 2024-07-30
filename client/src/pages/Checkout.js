@@ -22,6 +22,7 @@ const Checkout = () => {
   const [totalAmount, setTotalAmount] = useState(null);
   const [shippingInfo, setShippingInfo] = useState(null);
   const navigate = useNavigate();
+  const authState = useSelector((state) => state.auth);
 
   useEffect(() => {
     let sum = 0;
@@ -85,9 +86,7 @@ const Checkout = () => {
               </ol>
             </nav>
             <h4 className="title total">Contact Information</h4>
-            <p className="user-details total">
-              G.Garenov g_garenov@outlook.com
-            </p>
+            <p className="user-details total">{authState?.user?.email}</p>
             <h4 className="mb-3">Shipping Address</h4>
             <form
               onSubmit={formik.handleSubmit}
