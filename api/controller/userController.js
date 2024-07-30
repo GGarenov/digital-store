@@ -361,6 +361,7 @@ const getUserCart = asyncHandler(async (req, res) => {
   }
 });
 
+//Remove product from cart
 const removeProductFromCart = asyncHandler(async (req, res) => {
   const { _id } = req.user;
   const { cartItemId } = req.body;
@@ -376,6 +377,7 @@ const removeProductFromCart = asyncHandler(async (req, res) => {
   }
 });
 
+//Update product quantity from cart
 const updateProductQuantityFromCart = asyncHandler(async (req, res) => {
   console.log("Entering updateProductQuantityFromCart function");
   const { _id } = req.user;
@@ -411,6 +413,7 @@ const updateProductQuantityFromCart = asyncHandler(async (req, res) => {
   }
 });
 
+//Create order
 const createOrder = asyncHandler(async (req, res) => {
   const {
     shippingInfo,
@@ -442,6 +445,7 @@ const createOrder = asyncHandler(async (req, res) => {
   }
 });
 
+//Get my orders
 const getMyOrders = asyncHandler(async (req, res) => {
   const { _id } = req.user;
 
