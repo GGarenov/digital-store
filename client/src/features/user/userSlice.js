@@ -111,6 +111,7 @@ export const createOrder = createAsyncThunk(
   "user/order/create",
   async (orderData, { rejectWithValue }) => {
     try {
+      console.log("Creating order with data:", orderData); // Log order data
       return await authService.createOrder(orderData);
     } catch (error) {
       if (error.response) {
@@ -119,8 +120,10 @@ export const createOrder = createAsyncThunk(
           statusCode: error.response.status,
           data: error.response.data,
         };
+        console.error("Error creating order:", errorInfo); // Log error details
         return rejectWithValue(errorInfo);
       } else {
+        console.error("Unexpected error:", error.message); // Log unexpected errors
         return rejectWithValue({ message: "An unexpected error occurred" });
       }
     }
@@ -133,6 +136,9 @@ const initialState = {
   isSuccess: false,
   isLoading: false,
   message: "",
+  shippingInfo: {},
+  cartProducts: [],
+  totalAmount: 0,
 };
 
 export const authSlice = createSlice({

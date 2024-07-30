@@ -2,13 +2,16 @@ import React, { useEffect, useState } from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import CheckoutForm from "../pages/CheckoutForm";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createOrder } from "../features/user/userSlice";
 
 const CheckoutPayment = () => {
   const [stripePromise, setStripePromise] = useState(null);
   const [clientSecret, setClientSecret] = useState("");
   const dispatch = useDispatch();
+  const shippingInfo = useSelector((state) => state.auth.shippingInfo);
+  const cartState = useSelector((state) => state.auth.cartProducts);
+  const totalAmount = useSelector((state) => state.auth.totalAmount);
 
   useEffect(() => {
     fetch("http://localhost:3000/config").then(async (r) => {
@@ -20,36 +23,31 @@ const CheckoutPayment = () => {
   useEffect(() => {
     fetch("http://localhost:3000/create-payment-intent", {
       method: "POST",
-      body: JSON.stringify({}),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ amount: totalAmount * 100 }),
     }).then(async (result) => {
       const { clientSecret } = await result.json();
       setClientSecret(clientSecret);
     });
-  }, []);
+  }, [totalAmount]);
 
   const handleCheckout = (paymentInfo) => {
     const orderData = {
-      shippingInfo: {
-        firstName: "John",
-        lastName: "Doe",
-        address: "123 Main St",
-        city: "New York",
-        state: "NY",
-        other: "Apt 4B",
-        pincode: 10001,
-      },
-      orderItems: [
-        {
-          product: "60d21b967db78e1e48e23c6b", // Replace with actual product ID
-          color: "60d21b967db78e1e48e23c6a", // Replace with actual color ID
-          quantity: 1,
-          price: 100,
-        },
-      ],
-      totalPrice: "100",
-      totalPriceAfterDiscount: "90",
-      paymentInfo: paymentInfo,
+      shippingInfo,
+      orderItems: cartState.map((item) => ({
+        product: item.productId._id,
+        color: item.color._id,
+        quantity: item.quantity,
+        price: item.price,
+      })),
+      totalPrice: totalAmount,
+      totalPriceAfterDiscount: totalAmount, // Adjust if you have discounts
+      paymentInfo,
     };
+
+    console.log("Order Data to be dispatched:", orderData); // Log the order data
 
     dispatch(createOrder(orderData));
   };

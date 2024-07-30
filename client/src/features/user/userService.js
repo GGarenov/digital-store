@@ -61,11 +61,8 @@ const updateProductFromCart = async (cartDetail) => {
 };
 
 const createOrder = async (orderData) => {
-  const response = await axios.post(
-    `${base_url}cart/create-order`,
-    orderData,
-    config()
-  );
+  console.log("Sending request to create order:", orderData); // Log the order data
+  const response = await axios.post(`${base_url}user/order/create`, orderData);
   if (response.data) {
     return response.data;
   }
