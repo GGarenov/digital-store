@@ -91,7 +91,7 @@ function Header() {
                 </div>
                 <div>
                   <Link
-                    to={authState?.user === null ? "/login" : "/my-account"}
+                    to={authState?.user === null ? "/login" : "/my-profile"}
                     className="d-flex align-items-center gap-10 text-white"
                   >
                     <img src="images/user.svg" alt="user" />
@@ -166,6 +166,7 @@ function Header() {
                     <NavLink to="/">Home</NavLink>
                     <NavLink to="/product">Store</NavLink>
                     <NavLink to="/my-orders">My Orders</NavLink>
+                    <NavLink to="/my-profile">My Profile</NavLink>
                     <NavLink to="/blog">Blogs</NavLink>
                     <NavLink to="/contact">Contact</NavLink>
                   </div>

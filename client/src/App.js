@@ -27,6 +27,7 @@ import CheckoutPayment from "./components/CheckoutPayment";
 import PrivateRoutes from "./routing/PrivateRoutes";
 import OpenRoutes from "./routing/OpenRoutes";
 import Orders from "./pages/Orders";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -46,6 +47,14 @@ function App() {
               element={
                 <PrivateRoutes>
                   <Cart />
+                </PrivateRoutes>
+              }
+            />
+            <Route
+              path="my-profile"
+              element={
+                <PrivateRoutes>
+                  <Profile />
                 </PrivateRoutes>
               }
             />
