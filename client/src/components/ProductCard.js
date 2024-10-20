@@ -50,12 +50,15 @@ const ProductCard = (props) => {
                 }`}
               >
                 <div className="product-image">
-                  <img
-                    src={item.images[0].url}
-                    className="img-fluid"
-                    alt="product"
-                  />
-                  <img src={watch2} className="img-fluid" alt="product" />
+                  {item.images && item.images[0] ? (
+                    <img
+                      src={item.images[0].url}
+                      className="img-fluid"
+                      alt="product"
+                    />
+                  ) : (
+                    <img src={watch2} className="img-fluid" alt="product" />
+                  )}
                 </div>
                 <div className="product-details">
                   <h6 className="brand">{item.brand}</h6>
