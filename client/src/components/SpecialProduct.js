@@ -4,6 +4,10 @@ import { Link } from "react-router-dom";
 
 function SpecialProduct(props) {
   const { title, brand, totalrating, price, sold, quantity, id } = props;
+
+  // Convert totalrating to a number, defaulting to 0 if it's not a valid number
+  const numericTotalRating = Number(totalrating) || 0;
+
   return (
     <div className="col-6 mb-3">
       <div className="special-product-card">
@@ -17,7 +21,7 @@ function SpecialProduct(props) {
             <ReactStars
               count={5}
               size={24}
-              value={totalrating}
+              value={numericTotalRating}
               edit={false}
               activeColor="#ffd700"
             />
@@ -42,9 +46,9 @@ function SpecialProduct(props) {
                   className="progress-bar"
                   role="progressbar"
                   aria-label="Basic example"
-                  style={{ width: quantity / quantity + sold * 100 + "%" }}
-                  aria-valuenow={quantity / quantity + sold * 100}
-                  aria-valuemin={quantity}
+                  style={{ width: (sold / (sold + quantity)) * 100 + "%" }}
+                  aria-valuenow={sold}
+                  aria-valuemin={0}
                   aria-valuemax={sold + quantity}
                 ></div>
               </div>

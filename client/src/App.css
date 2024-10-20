@@ -335,6 +335,11 @@ footer .input-group {
   overflow: hidden;
 }
 
+.product-image img {
+  opacity: 1; /* Ensure images are fully visible */
+  transition: opacity 0.3s ease; /* Add a smooth transition effect */
+}
+
 .product-card .product-image {
   height: 270px;
   object-fit: contain;
